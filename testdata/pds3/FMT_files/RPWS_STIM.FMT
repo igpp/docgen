@@ -1,0 +1,131 @@
+/**********************************************************************/
+/* RPWS_STIM.FMT                                                      */
+/* describes the structure of the stim event file                     */
+/* that appears on the high-rate archives.                            */
+/*                                                                    */
+/*  21 Nov 2003  Update NAME=DUR Object description                   */
+/**********************************************************************/
+
+OBJECT                  = COLUMN
+  NAME                    = SCLK_SPICE
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 2
+  BYTES                   = 16
+  DESCRIPTION             = "Spacecraft Clock of
+    STIM event.  This column is in a format acceptable
+    to the SPICE kernel."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = SCLK_HEX
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 21
+  BYTES                   = 12
+  DESCRIPTION             = "Spacecraft clock of
+    STIM event.  This column is hexadecimal."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = SCET
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 36
+  BYTES                   = 21
+  DESCRIPTION             = "Spacecraft event time."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = FSWVER
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 60
+  BYTES                   = 6
+  DESCRIPTION             = "RPWS Instrument Flight
+    Software Version string."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = FLAG
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 69
+  BYTES                   = 4
+  DESCRIPTION             = "record validity flag.
+    STIM indicates a valid STIM record.
+    XSTM indicates an invalid STIM record (may be ignored).
+    LPSW indicates a Langmuir Probe Sweep.
+    HSND indicates an HFR sounder sweep.
+    HCAL indicates an HFR calibration.
+    HDMP indicates an HFR memory dump."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = DUR
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 76
+  BYTES                   = 7
+  DESCRIPTION             = "Event Duration.
+    Valid only when FLAG is LPSW, HSND or HCAL.
+    Value is expressed in seconds and the field may also
+    contain the string Unknown (this is usually an indication
+    of improperly decoded data that should be discarded)."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = SEQ
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 86
+  BYTES                   = 3
+  DESCRIPTION             = "STIM sequence number.
+    Valid only when FLAG is STIM"
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = ID_0
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 92
+  BYTES                   = 4
+  DESCRIPTION             = "STIM ID-0 field.
+    Valid only when FLAG is STIM"
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = ID_1
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 99
+  BYTES                   = 6
+  DESCRIPTION             = "STIM ID-1 field.
+    Valid only when FLAG is STIM.
+    This field is hexadecimal and contains the currently
+    running IEB Trigger ID number in the lower 8 bits."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = ID_2
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 108
+  BYTES                   = 4
+  DESCRIPTION             = "STIM ID-2 field.
+    Valid only when FLAG is STIM"
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = DOY
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 115
+  BYTES                   = 3
+  DESCRIPTION             = "Day of Year.
+    Valid only when FLAG is STIM.
+    This is the day-of-year on which the flight software
+    running in the instrument was built.  This is a cross
+    check on the FSWVER field.  Consult UG/SOM (RPWSUG.HTM)
+    for usage tables."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = SCSEQ
+  DATA_TYPE               = CHARACTER
+  START_BYTE              = 121
+  BYTES                   = 7
+  DESCRIPTION             = "(Spacecraft) Sequence Name.
+    Valid only when FLAG is STIM."
+END_OBJECT              = COLUMN
+
+/* END OF RPWS_STIM.FMT */

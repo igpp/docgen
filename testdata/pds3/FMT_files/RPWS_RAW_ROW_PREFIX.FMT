@@ -1,0 +1,55 @@
+/****************************************************************************/
+/* RPWS_RAW_ROW_PREFIX.FMT                                                  */
+/*                                                                          */
+/* 07 JUL 2003 First issue                                                  */
+/*                                                                          */
+/* RPWS_RAW_ROW_PREFIX.FMT                                                  */
+/* describes a portion of the structure of the row prefix table             */
+/*   (record header) for the Cassini RPWS RAW archive files                 */
+/*   (sometimes called the "U" files)                                       */
+/****************************************************************************/
+
+OBJECT                  = COLUMN
+  NAME                    = RECORD_BYTES
+  DATA_TYPE               = MSB_UNSIGNED_INTEGER
+  START_BYTE              = 1
+  BYTES                   = 4
+  DESCRIPTION             = "total record length - 4.
+    In other words, the number of octets in the record NOT including
+    this length word."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = RECORD_TYPE
+  DATA_TYPE               = MSB_UNSIGNED_INTEGER
+  START_BYTE              = 5
+  BYTES                   = 4
+  DESCRIPTION             = "Indicates the receiver from which
+    this data record originated."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = RECORD_STATUS
+  DATA_TYPE               = MSB_UNSIGNED_INTEGER
+  START_BYTE              = 9
+  BYTES                   = 4
+  DESCRIPTION             = "See RPWS Users Guide."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = LENGTH_DATA_START
+  DATA_TYPE               = MSB_UNSIGNED_INTEGER
+  START_BYTE              = 61
+  BYTES                   = 4
+  DESCRIPTION             = "Data octet count - 3
+    prior to decompression."
+END_OBJECT              = COLUMN
+
+OBJECT                  = COLUMN
+  NAME                    = LENGTH_DATA_LENGTH
+  DATA_TYPE               = MSB_UNSIGNED_INTEGER
+  START_BYTE              = 65
+  BYTES                   = 4
+  DESCRIPTION             = "Data octet count - 3"
+END_OBJECT              = COLUMN
+

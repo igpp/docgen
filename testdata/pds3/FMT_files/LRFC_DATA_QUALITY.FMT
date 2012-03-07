@@ -1,0 +1,78 @@
+/*                       */                                                   
+/* LRFC_DATA_QUALITY.FMT */                                                   
+/*                       */                                                   
+OBJECT                      = COLUMN                                          
+  NAME                      = ENGINEERING_DATA                                
+  DATA_TYPE                 = MSB_BIT_STRING                                  
+  START_BYTE                = 13                                              
+  BYTES                     = 4                                               
+  DESCRIPTION               = "This field contains the sensor ID number and   
+                               data quality status.  Bits will be added as    
+                               sources of interferance, telemetry errors,     
+                               etc. are identified.  Individual data values   
+                               within a capture are marked by multiplying     
+                               the original measurement by negative one."     
+                                                                              
+  OBJECT                    = BIT_COLUMN                                      
+    NAME                    = VALID_DATA_FLAG                                 
+    BIT_DATA_TYPE           = MSB_UNSIGNED_INTEGER                            
+    START_BIT               = 1                                               
+    BITS                    = 1                                               
+    DESCRIPTION             = "This is the generic flag for data of questional
+                               value, due to unforeseen events: telemetry     
+                               corruption during transmit/receive,            
+                               compression/decompression errors, etc.  All    
+                               or part of the data set may still be of valid  
+                               measurements, but it is left up to the user to 
+                               decide.                                        
+                                0 = valid data                                
+                                1 = data of questional value"                 
+  END_OBJECT                = BIT_COLUMN                                      
+                                                                              
+  OBJECT                    = BIT_COLUMN                                      
+    NAME                    = HFR_SOUNDER_ACTIVE                              
+    BIT_DATA_TYPE           = MSB_UNSIGNED_INTEGER                            
+    START_BIT               = 2                                               
+    BITS                    = 1                                               
+    DESCRIPTION             = "Indicates if the high frequency receiver       
+                                sounder was active during the data capture.   
+                                0 = hfr sounder inactive                      
+                                1 = hfr sounder active"                       
+  END_OBJECT                = BIT_COLUMN                                      
+                                                                              
+  OBJECT                    = BIT_COLUMN                                      
+    NAME                    = LP_RAW_SWEEP_ACTIVE                             
+    BIT_DATA_TYPE           = MSB_UNSIGNED_INTEGER                            
+    START_BIT               = 3                                               
+    BITS                    = 1                                               
+    DESCRIPTION             = "Indicates if the langmuir probe raw            
+                                sweep was active during the data capture.     
+                                0 = lp raw sweep inactive                     
+                                1 = lp raw sweep active"                      
+  END_OBJECT                = BIT_COLUMN                                      
+                                                                              
+  OBJECT                    = BIT_COLUMN                                      
+    NAME                    = GROUND_PRODUCED_DATA                            
+    BIT_DATA_TYPE           = MSB_UNSIGNED_INTEGER                            
+    START_BIT               = 4                                               
+    BITS                    = 1                                               
+    DESCRIPTION             = "Indicates if the data was ground produced data 
+                                from flight data.  For example, the wfr time  
+                                series data was transformed into its          
+                                frequency components to produce lfdr data."   
+  END_OBJECT                = BIT_COLUMN                                      
+                                                                              
+  OBJECT                    = BIT_COLUMN                                      
+    NAME                    = SENSOR_NUMBER                                   
+    BIT_DATA_TYPE           = MSB_UNSIGNED_INTEGER                            
+    START_BIT               = 29                                              
+    BITS                    = 4                                               
+    DESCRIPTION             = "Sensor Number identifies which                 
+                                sensor was connected to the receiver.         
+                                   0=Ex    4=Bx      8=Hf                     
+                                   1=Eu    5=By     11=Lp                     
+                                   2=Ev    6=Bz                               
+                                   3=Ew"                                      
+  END_OBJECT                = BIT_COLUMN                                      
+                                                                              
+END_OBJECT                  = COLUMN                                          
