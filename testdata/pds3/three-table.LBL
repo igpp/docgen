@@ -1,4 +1,5 @@
 PDS_VERSION_ID               = PDS3
+LIST = {One, Two, Three}
 OBJECT                       = HFRA_CAL_LEVELS_AGC_TABLE
   INTERCHANGE_FORMAT         = ASCII
   ROW_BYTES                  = 140

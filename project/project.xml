@@ -5,15 +5,15 @@
 -->
 <project name="project-config" basedir="." default="...">
     <property name="version"        value="1.0.0"/>
-    <property name="package.title"  value="PDS DocGen"/>
-    <property name="package.name"   value="pds-docgen"/>
+    <property name="package.title"  value="IGPP DocGen"/>
+    <property name="package.name"   value="igpp-docgen"/>
     <property name="package.vendor" value="UCLA/IGPP"/>
-    <property name="copyright"    value="Copyright &#169; 2011 Regents University of California. All Rights Reserved."/>    
+    <property name="copyright"    value="Copyright &#169; 2012 Regents University of California. All Rights Reserved."/>    
     <property name="release.user"  value="tking"/>
     <property name="release.host"  value="release.igpp.ucla.edu"/>
-    <property name="release.path"  value="/var/www/release/root/libraries/pds/docgen"/>
+    <property name="release.path"  value="/var/www/release/root/libraries/igpp/docgen"/>
     <property name="release.local"   value="/java/jre/lib/ext" />
-    <property name="release.jar"   value="/projects/jar/pds" />
-    <property name="release.dist"   value="/projects/dist/pds" />
-    <property name="main-class"   value="pds.docgen.FromPDS3"/>
+    <property name="release.jar"   value="/projects/jar/igpp" />
+    <property name="release.dist"   value="/projects/dist/igpp" />
+    <property name="main-class"   value="igpp.docgen.Process"/>
 </project>

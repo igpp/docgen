@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pds.docgen;
+package igpp.docgen;
 
 /**
  * @author tking
@@ -16,15 +16,10 @@ import java.io.OutputStreamWriter;
 import java.io.FileOutputStream;
 import java.io.Writer;
 
-import pds.label.PDSLabel;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.VelocityContext;
-
 
 //import org.apache.commons.cli.*;
 import org.apache.commons.cli.Options;
@@ -37,9 +32,11 @@ import org.apache.commons.cli.HelpFormatter;
 public class FromTable
 {
 	private String	mVersion = "1.0.0";
-	private String mOverview = "FromTable scans a file containing a delimited table and for each row generates an Apache Velocity template.\n"
+	private String mOverview = "FromTable scans a file containing a delimited table and for each row generates a document "
+			 + "using an Apache Velocity template.\n"
 			 + "The name for each field is taken from the first line. Lines begining with \"#\" are considered comments."
-			 + "Values are placed in the \"$table\" context in Velocity.";
+			 + "Values are placed in the \"$table\" context in Velocity. The output file name can contain field name references"
+			 + "using the syntax (i.e. precede field name with a \"$\" to create customize file names for each record.";
 	private String mAcknowledge = "Development funded by NASA's PDS project at UCLA.";
 
 	private boolean mVerbose= false;
@@ -54,6 +51,7 @@ public class FromTable
 		mAppOptions.addOption( "t", "template", true, "Template. The template for the output using Apache Velocity Template Language." );
 		mAppOptions.addOption( "d", "data", true, "The name of the file containing the table data." );
 		mAppOptions.addOption( "p", "print", false, "Print. Print the value stack from parsing the label to the output file." );
+		mAppOptions.addOption( "s", "separator", true, "Separator. Pattern that separates values. Default: is any number of spaces ([ ]+)" );
 	}
 
 	public static void main( String args[] )
@@ -64,8 +62,7 @@ public class FromTable
         String outfile = null;
         String infile = null;
         String template = null;
-        boolean print = false;
-        String includePath = null;
+        String separator = "[ ]+";
         
 		CommandLineParser parser = new PosixParser();
         try
@@ -76,7 +73,6 @@ public class FromTable
    			if(line.hasOption("h")) me.showHelp();
    			if(line.hasOption("v")) me.mVerbose = true;
    			if(line.hasOption("o")) outfile = line.getOptionValue("o");
-   			if(line.hasOption("p")) print = true;
    			if(line.hasOption("t")) template = line.getOptionValue("t");
    			if(line.hasOption("d")) infile = line.getOptionValue("d");
         }
@@ -86,7 +82,7 @@ public class FromTable
             return;
         }
         
-        if(template == null && ! print) {
+        if(template == null) {
         	System.out.println("Template (-t) must be specified.");
         	return;
         }
@@ -109,37 +105,38 @@ public class FromTable
 	        	buffer = data.readLine();
 	        	fieldNames = buffer.split("[ ]+");
 	        } catch(Exception e) {
-	        	System.out.println("Unable to parse label file. " + e.getMessage());
+	        	System.out.println("Unable to parse data table file. " + e.getMessage());
 	        	return;
 	        }
 	        
 	        HashMap<String, Object> dataMap = new HashMap<String, Object>();
 	        
 	        while((buffer = data.readLine()) != null) {
-	        	System.out.println("Read: |" + buffer + "|");
 	        	if(buffer.length() == 0) continue;
 	        	if(buffer.startsWith("#")) continue;	// Skip comments
 	        	
-	        	String[] values = buffer.split("[ ]+");
+	        	String[] values = buffer.split(separator);
 	        	if(values.length != fieldNames.length) 	continue;	// Maybe an error?
 	        	
 	        	for(int i = 0; i < fieldNames.length; i++) {
 	        		dataMap.put(fieldNames[i], values[i]);
 	        	}
 	        	
-		        if(print) {
-		        	me.printMap("", dataMap);
+		        if(me.mVerbose) {
+		        	igpp.docgen.PrintMap.valueList(System.out, "", dataMap);
 		        }
 		        
 		        // Else process template
 		        context.put("data", dataMap);
 		        
-		        /* lets render a template */
+		        /* Render document with a template */
 		        try
 		        {
 		        	OutputStream outstream = System.out;
+		        	// Replace pattern in file name
+		        	String outname = org.apache.velocity.util.StringUtils.stringSubstitution(outfile, dataMap).toString();
 		        	if(outfile != null) {
-		        		outstream = new FileOutputStream(outfile);
+		        		outstream = new FileOutputStream(outname);
 		        	}
 		        	Writer writer = new BufferedWriter(new OutputStreamWriter(outstream));
 		        	
@@ -180,25 +177,5 @@ public class FromTable
 		System.out.println("Acknowledgements:");
 		System.out.println(mAcknowledge);
 		System.out.println("");
-	}
-
-	/**
-	 * Print the map in template format
-	 **/
-	public void printMap(String prefix, HashMap<String, Object> map)
-	{
-		ArrayList<HashMap<String, Object>> arrayType = new ArrayList<HashMap<String, Object>>();
-		
-		Set<String> keySet = (Set<String>) map.keySet();
-		for(String key : keySet) {
-			if(map.get(key).getClass().isInstance(arrayType) ) {
-				ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) map.get(key);
-				for(HashMap<String, Object> mapItem : list) {
-					printMap(prefix + key + ".",  mapItem);
-				}
-			} else {
-				System.out.println(prefix + key + ":" + map.get(key));
-			}
-		}
 	}
 }

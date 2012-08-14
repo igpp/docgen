@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pds.docgen;
+package igpp.docgen;
 
 /**
  * @author tking
@@ -14,15 +14,10 @@ import java.io.OutputStreamWriter;
 import java.io.FileOutputStream;
 import java.io.Writer;
 
-import pds.label.PDSLabel;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.VelocityContext;
-
 
 //import org.apache.commons.cli.*;
 import org.apache.commons.cli.Options;
@@ -36,7 +31,9 @@ public class FromPDS3
 {
 	private String	mVersion = "1.0.0";
 	private String mOverview = "FromPDS3 scans a PDS3 label file and generates a list values which can be used to populate a Apache Velocity template.\n"
-									 + "Values are placed in the \"$label\" context.";
+									 + "Values are placed in the \"$label\" context."
+									 + "A supplemental data file may be provided as a flat table. The name for each field is taken from the first line."
+									 + "Lines begining with \"#\" are considered comments. ";
 	private String mAcknowledge = "Development funded by NASA's PDS project at UCLA.";
 
 	private boolean mVerbose= false;
@@ -50,7 +47,7 @@ public class FromPDS3
 		mAppOptions.addOption( "o", "output", true, "Output. Output generated document to {file}. Default: System.out." );
 		mAppOptions.addOption( "t", "template", true, "Template. The template for the output using Apache Velocity Template Language." );
 		mAppOptions.addOption( "l", "label", true, "PDS3 Label. The PDS3 label to parse." );
-		mAppOptions.addOption( "p", "print", false, "Print. Print the value stack from parsing the label to the output file." );
+		mAppOptions.addOption( "d", "data", true, "The name of the file containing the table data." );
 		mAppOptions.addOption( "i", "include", true, "Include Path. Path to look for files referenced with an INCLUDE or STRUCTURE pointer." );
 	}
 
@@ -60,9 +57,9 @@ public class FromPDS3
 
         FromPDS3 me = new FromPDS3();
         String outfile = null;
-        String infile = null;
+        String labelFile = null;
         String template = null;
-        boolean print = false;
+        String dataFile = null;
         String includePath = null;
         
 		CommandLineParser parser = new PosixParser();
@@ -74,9 +71,9 @@ public class FromPDS3
    			if(line.hasOption("h")) me.showHelp();
    			if(line.hasOption("v")) me.mVerbose = true;
    			if(line.hasOption("o")) outfile = line.getOptionValue("o");
-   			if(line.hasOption("p")) print = true;
    			if(line.hasOption("t")) template = line.getOptionValue("t");
-   			if(line.hasOption("l")) infile = line.getOptionValue("l");
+   			if(line.hasOption("l")) labelFile = line.getOptionValue("l");
+   			if(line.hasOption("d")) dataFile = line.getOptionValue("l");
    			if(line.hasOption("i")) includePath = line.getOptionValue("i");
         }
         catch(Exception e)
@@ -85,12 +82,12 @@ public class FromPDS3
             return;
         }
         
-        if(template == null && ! print) {
+        if(template == null) {
         	System.out.println("Template (-t) must be specified.");
         	return;
         }
 
-        if(infile == null) {
+        if(labelFile == null) {
         	System.out.println("Label (-l) must be specified.");
         	return;
         }
@@ -99,31 +96,23 @@ public class FromPDS3
 
         VelocityContext context = new VelocityContext();
 
-        PDSLabel label = new PDSLabel();
-        try {
-        	label.parse(infile);
-        } catch(Exception e) {
-        	System.out.println("Unable to parse label file. " + e.getMessage());
-        	return;
+        HashMap<String, Object> labelMap = igpp.docgen.ParsePDS3.process(labelFile, includePath);
+        if(me.mVerbose) {
+        	igpp.docgen.PrintMap.valueList(System.out, "", labelMap);
         }
         
-        PDSLabel richLabel = null;
-        try {
-        	richLabel = label.expandPointers(includePath);
-        } catch(Exception e) {
-        	System.out.println("Unable to expand label file. " + e.getMessage());
-        	return;
-        }
-        
-        HashMap<String, Object> labelMap = richLabel.getHashMap(0);
-        if(print) {
-        	me.printMap("", labelMap);
-        	return;
-        }
-        
-        // Else process template
+        // Save map in "label" context
         context.put("label", labelMap);
-        
+ 
+        // If a table is also supplied - parse and map 
+        if(dataFile != null) {
+        	HashMap<String, Object> dataMap = igpp.docgen.ParseList.process(dataFile);
+            if(dataMap != null) context.put("data", dataMap);
+            if(me.mVerbose) {
+            	igpp.docgen.PrintMap.valueList(System.out, "", dataMap);
+            }
+        }
+
         /* lets render a template */
         try
         {
@@ -166,25 +155,5 @@ public class FromPDS3
 		System.out.println("Acknowledgements:");
 		System.out.println(mAcknowledge);
 		System.out.println("");
-	}
-
-	/**
-	 * Print the map in template format
-	 **/
-	public void printMap(String prefix, HashMap<String, Object> map)
-	{
-		ArrayList<HashMap<String, Object>> arrayType = new ArrayList<HashMap<String, Object>>();
-		
-		Set<String> keySet = (Set<String>) map.keySet();
-		for(String key : keySet) {
-			if(map.get(key).getClass().isInstance(arrayType) ) {
-				ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) map.get(key);
-				for(HashMap<String, Object> mapItem : list) {
-					printMap(prefix + key + ".",  mapItem);
-				}
-			} else {
-				System.out.println(prefix + key + ":" + map.get(key));
-			}
-		}
 	}
 }

@@ -4,16 +4,15 @@
     xsi:schemaLocation="http://pds.nasa.gov/schema/pds4/ppi/V01 file:/C:/My%20Documents/PDS/PDS4/Release%201d%20-%20Review/ppi/pds-product.xsd">
     <Product_Observational>
         <Data_Standards xmlns="http://pds.nasa.gov/schema/pds4/pds/v05">
-            <dd_version_id>0.5.0.0.g</dd_version_id>
-            <std_ref_version_id>4.0.4 (beta)</std_ref_version_id>
+            <dd_version_id></dd_version_id>
+            <std_ref_version_id></std_ref_version_id>
         </Data_Standards>
         <Identification_Area_Product xmlns="http://pds.nasa.gov/schema/pds4/pds/v05">
             <logical_identifier>URN:NASA:PDS:$label.DATA_SET_ID:$label.PRODUCT_ID</logical_identifier>
             <version_id></version_id>
             <product_class></product_class>
-            <title>$label.PRODUCT_ID</title>
-            <description>$label.DESCRIPTION</description>
-            <type>$label.STANDARD_DATA_PRODUCT_ID</type>
+            <title></title>
+            <type></type>
         </Identification_Area_Product>
         <Cross_Reference_Area_Product xmlns="http://pds.nasa.gov/schema/pds4/pds/v05">
             <Observing_System>
@@ -30,25 +29,33 @@
         </Observation_Area>
         <File_Area_Observational xmlns="http://pds.nasa.gov/schema/pds4/pds/v05">
             <File>
-                <file_name>$label.PRODUCT_FILE</file_name>
-                <md5_checksum>$label.PRODUCT_FILE_MD5</md5_checksum>
+                <file_name></file_name>
             </File>
 #foreach ($table in $label.TABLE)
             <Table_Base>
-                <local_identifier>$table.OBJECT_NAME</local_identifier>
+                <local_identifier></local_identifier>
                 <encoding_type>$table.INTERCHANGE_FORMAT</encoding_type>
                 <fields>$table.COLUMN.size()</fields>
-                <offset>$table.OBJECT_OFFSET</offset>
+                <offset></offset>
                 <record_length>$table.ROW_BYTES</record_length>
                 <records>$table.ROWS</records>
                 <Table_Record>
 #foreach( $column in $table.COLUMN) 
+   #if ($column.ITEMS) ## If ITEMs exist handle this way
+                    <Table_Bit_Field>
+                        <name>$column.NAME</name>
+                        <data_type>$column.DATA_TYPE</data_type>
+                        <field_length>$column.BYTES</field_length>
+                        <field_location>$column.START_BYTE</field_location>
+                    </Table_Bit_Field>
+   #else ## Handle as a binary field
                     <Table_Binary_Field>
                         <name>$column.NAME</name>
                         <data_type>$column.DATA_TYPE</data_type>
                         <field_length>$column.BYTES</field_length>
                         <field_location>$column.START_BYTE</field_location>
                     </Table_Binary_Field>
+   #end
 #end
                 </Table_Record>
             </Table_Base>
