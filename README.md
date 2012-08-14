@@ -1,4 +1,4 @@
-docgen
+igpp.docgen
 ======
 
 Velocity based document generator.
