@@ -1,20 +1,20 @@
-Title: pds.docgen tool
+Title: igpp.docgen tool
 Author: Todd King
 Date: May 10, 2012
 CSS: style.css
 
-# pds.docgen tool
+# igpp.docgen tool
 Last update: May 10, 2012; *Author: Todd King* 
 
 ## Introduction
 ___________________
 
-The pds.docgen executable jar is a set of tools to parse
+The igpp.docgen executable jar is a set of tools to parse
 structured information (metadata) and merge the information
 with an Apache Velocity template. 
 
 A Velocity template contains text and references to variables. 
-The pds.docgen executable is used to defined the value assigned to variables. 
+The igpp.docgen executable is used to defined the value assigned to variables. 
 Variables can be defined on the command line, read from a PDS3 label or from a text file. 
 Variables are placed into one or more named contexts. When loading variables from a file 
 the context name can be chosen. Variables from the command line are placed in a context
@@ -24,7 +24,7 @@ named "options". The syntax for specifying a named context that is populated fro
 
 files ending in ".lbl" are parsed as PDS3 label files. All others are parsed as text files containing one keyword=value per line. Lines beginning with "#" are considered comments.
 
-Usage: java pds.docgen.Process [options] [file...]
+Usage: java igpp.docgen.Process [options] [file...]
 
 **Options:**
 >
@@ -48,18 +48,18 @@ The name for each variable in the "options" context matches the long name of the
 ## Installation
 ________________________
 
-pds.docgen is distributed as a executable JAR file. You can download the
+igpp.docgen is distributed as a executable JAR file. You can download the
 current distribution from To "install" an executable
 JAR copy the JAR file to a local directory. It can be run using the "-jar" option 
 to the "java" command. For example:
 
-    java -jar pds.docgen.jar [options]
+    java -jar igpp.docgen.jar [options]
 
-The pds.docgen.jar file can also be installed in a location that is in the
+The igpp.docgen.jar file can also be installed in a location that is in the
 Java extension directory. When installed this way the tool can be run with
-the "pds.docgen.Process" class. For example:
+the "igpp.docgen.Process" class. For example:
 
-    java pds.docgen.Process [options]
+    java igpp.docgen.Process [options]
 
 ## Usage Examples
 ________________________
@@ -68,21 +68,21 @@ Here are a few examples using the exectable jar:
 
 Use the Velocity Template "example-1.vm" and the file "table-1.csv" assigned to the context "table"
 
-    java -jar pds.docgen.jar table:table-1.csv example-1.vm
+    java -jar igpp.docgen.jar table:table-1.csv example-1.vm
 
 will replace parameters in "example-1.vm" with values from "table-1.csv" and output the result as formatted XML.
 
 Do the same with lot's a diagnostic information
 
-    java -jar pds.docgen.jar -v table:table-1.csv example-1.vm
+    java -jar igpp.docgen.jar -v table:table-1.csv example-1.vm
 
 Do the same, but look or templates in a directory called "/templates".
 
-    java -jar pds.docgen.jar -v -t /templates table:table-1.csv example-1.vm
+    java -jar igpp.docgen.jar -v -t /templates table:table-1.csv example-1.vm
 
 Used the Velocity Template "example-pds3.vm" and the file "table-1.csv" assigned to the context "table"
  
-    java -jar pds.docgen.jar -f pds3 table:table-1.csv example-pds3.vm
+    java -jar igpp.docgen.jar -f pds3 table:table-1.csv example-pds3.vm
 
 will replace parameters in "example-pds3.vm" with values from "table-1.csv" and output the result as formatted as a PDS3 label.
 
@@ -102,7 +102,7 @@ Examples:
     $example
     $example-another
 
-pds.docgen parses a variety of file formats (i.e., text, PDS3 label) and generates variable definitions to reflect the content. 
+igpp.docgen parses a variety of file formats (i.e., text, PDS3 label) and generates variable definitions to reflect the content. 
 Variables are placed in named context which can be referenced using a dot notation. For example, if the variable "this" is 
 placed in the "my" context it can be referenced with the syntax:
 
