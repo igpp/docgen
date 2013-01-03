@@ -1,0 +1,79 @@
+PDS_VERSION_ID          = PDS3                                               
+RECORD_TYPE             = STREAM                                             
+                                                                             
+OBJECT                  = VOLUME                                             
+  VOLUME_SERIES_NAME      = "MISSION TO SATURN"                              
+  VOLUME_SET_NAME         = "CASSINI ORBITER RADIO AND PLASMA WAVE SCIENCE"  
+  VOLUME_SET_ID           = "USA_NASA_PDS_CORPWS_9XXX"                       
+  VOLUMES                 = 1                                                
+  VOLUME_NAME             = "                                                
+    VOLUME 9003: CASSINI RADIO AND PLASMA WAVE LOW RATE FULL RES"            
+  VOLUME_ID               = CORPWS_9003                                      
+  VOLUME_VERSION_ID       = "VERSION 1"                                      
+  VOLUME_FORMAT           = "UDF_ISO-9660_BRIDGE"                            
+  MEDIUM_TYPE             = "ELECTRONIC"                                     
+  PUBLICATION_DATE        = 2012-10-15                                       
+  DESCRIPTION             = "                                                
+    CERTIFIED This volume contains documentation and all available Cassini   
+    Radio and Plasma Wave Science (RPWS) data from the calibrated full       
+    resolution data set. This data set includes calibrated values for        
+    each frequency channel for each sensor for all times during the          
+    mission including the two Venus flybys, the Earth flyby, the Jupiter     
+    flyby, interplanetary cruise, and the entire Saturn tour."               
+                                                                             
+  MISSION_NAME            = "CASSINI-HUYGENS"                                
+  SPACECRAFT_NAME         = "CASSINI ORBITER"                                
+  DATA_SET_ID             = "CO-V/E/J/S/SS-RPWS-3-RDR-LRFULL-V1.0"           
+                                                                             
+  OBJECT                  = DATA_PRODUCER                                    
+    INSTITUTION_NAME        = "UNIVERSITY OF IOWA"                           
+    FACILITY_NAME           = "DEPARTMENT OF PHYSICS AND ASTRONOMY"          
+    FULL_NAME               = "DR. WILLIAM S. KURTH"                         
+    ADDRESS_TEXT            = "DR. WILLIAM S. KURTH                          
+      DEPARTMENT OF PHYSICS AND ASTRONOMY                                    
+      THE UNIVERSITY OF IOWA                                                 
+      IOWA CITY, IOWA 52242"                                                 
+    TELEPHONE_NUMBER        = "3193351926"                                   
+    ELECTRONIC_MAIL_ID      = "WILLIAM-KURTH@UIOWA.EDU"                      
+    ELECTRONIC_MAIL_TYPE    = "INTERNET"                                     
+  END_OBJECT              = DATA_PRODUCER                                    
+                                                                             
+  OBJECT                  = DATA_PRODUCER                                    
+    INSTITUTION_NAME        = "UNIVERSITY OF IOWA"                           
+    FACILITY_NAME           = "DEPARTMENT OF PHYSICS AND ASTRONOMY"          
+    FULL_NAME               = "DR. DONALD A. GURNETT"                        
+    ADDRESS_TEXT            = "DR. DONALD A. GURNETT                         
+      DEPARTMENT OF PHYSICS AND ASTRONOMY                                    
+      THE UNIVERSITY OF IOWA                                                 
+      IOWA CITY, IOWA 52242"                                                 
+    TELEPHONE_NUMBER        = "3193351697"                                   
+    ELECTRONIC_MAIL_ID      = "DONALD-GURNETT@UIOWA.EDU"                     
+    ELECTRONIC_MAIL_TYPE    = "INTERNET"                                     
+  END_OBJECT              = DATA_PRODUCER                                    
+                                                                             
+  OBJECT                  = DATA_SUPPLIER                                    
+    INSTITUTION_NAME        = "UNIVERSITY OF CALIFORNIA, LOS ANGELES"        
+    FACILITY_NAME           = "GEOPHYSICS AND PLANETARY PHYSICS"             
+    DISCIPLINE_NAME         = "PLASMA INTERACTIONS"                          
+    FULL_NAME               = "DR. RAYMOND J. WALKER"                        
+    ADDRESS_TEXT            = "DR. RAYMOND J. WALKER                         
+      INST. OF GEOPHYSICS AND PLANETARY PHYSICS                              
+      UCLA                                                                   
+      405 HILGARD AVE.                                                       
+      LOS ANGELES, CA 90095-1567"                                            
+    TELEPHONE_NUMBER        = "3108257685"                                   
+    ELECTRONIC_MAIL_ID      = "RWALKER@IGPP.UCLA.EDU"                        
+    ELECTRONIC_MAIL_TYPE    = "INTERNET"                                     
+  END_OBJECT              = DATA_SUPPLIER                                    
+                                                                             
+  OBJECT                  = CATALOG                                          
+    ^MISSION_CATALOG         = "CO_MISSION.CAT"                              
+    ^INSTRUMENT_HOST_CATALOG = "CO_INST_HOST.CAT"                            
+    ^INSTRUMENT_CATALOG      = "CO_RPWS_INST.CAT"                            
+    ^DATA_SET_CATALOG        = "CO_RPWS_LR_FULL_DS.CAT"                      
+    ^REFERENCE_CATALOG       = { "CO_RPWS_REF.CAT", "CO_PROJREF.CAT" }       
+    ^PERSONNEL_CATALOG       = "CO_RPWS_PERSON.CAT"                          
+  END_OBJECT              = CATALOG                                          
+                                                                             
+END_OBJECT              = VOLUME                                             
+END                                                                          

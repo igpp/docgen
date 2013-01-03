@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Bourne Shell script that allows easy execution of a tool
+# without the need to set the CLASSAPTH, placing JAR in extension directory
+# or having to type in that long java command (java spase.tool ...)
+#
+# Version: $Id: collator 2 2009-03-05 16:57:37Z tking $
+
+MY_DIR=`readlink -nf $0`
+THIS_DIR=`dirname $MY_DIR`
+
+# Executes tool
+# Arguments are passed in to the tool via '$@'
+
+java -Djava.ext.dirs=${THIS_DIR}/../lib igpp.docgen.Process "$@"
