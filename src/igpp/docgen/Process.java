@@ -19,10 +19,13 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.VelocityContext;
 
 //import org.apache.commons.cli.*;
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.PosixParser;
+import org.apache.commons.cli.GnuParser;
+import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.HelpFormatter;
 
 public class Process
@@ -36,10 +39,16 @@ public class Process
 			 + "are placed in a context	named \"options\". The syntax for specifying a named context that is\n"
 			 + "populated from a file is:\n"
              + "\n"
-			 + "   name:file\n"
+			 + "   [format]:name:file\n"
              + "\n"
-			 + "files ending in \".lbl\" are parsed as PDS3 label files. All others are parsed as text files\n"
-             + "containing one keyword=value per line. Lines begining with \"#\" are considered comments."
+			 + "files ending in \".lbl\", \".cat\", or \".fmt\" are parsed as PDS3 label files. \n"
+             + "Files ending in \".txt\" are parsed as variable lists containing one keyword=value per line. \n"
+			 + "Lines begining with \"#\" are considered comments. Files ending in \".csv\" or \n"
+             + "\".tab\" are processed as delimited text files with the first line containing field names. \n"
+			 + "\n"
+             + "The format determined by the filename extension can be overriden with a \"format\" designator \n"
+			 + "prefix in the context options. Supported format designators are \"pds3\" for PDS3 format \n"
+             + "\"list\" for variable lists and \"csv\" for delimited text."
 			 ;
 	private String mAcknowledge = "Development funded by NASA's PDS project at UCLA.";
 
@@ -76,7 +85,7 @@ public class Process
     		return;
     	}
 
-		CommandLineParser parser = new PosixParser();
+		CommandLineParser parser = new BasicParser();
         try {
             CommandLine line = parser.parse(me.mAppOptions, args);
 
@@ -96,12 +105,11 @@ public class Process
         VelocityContext context = new VelocityContext();
         
         // Default context for working with transforms
-        Integer contextI = new Integer(0);       
-        context.put("Integer", contextI);
-        Double contextD = new Double(0.0);       
-        context.put("Double", contextD);
-        igpp.util.File contextFile = new igpp.util.File();       
-        context.put("File", contextFile);
+        context.put("Integer", new Integer(0));
+        context.put("Double", new Double(0.0));
+        context.put("Text", new igpp.util.Text());
+        context.put("File", new igpp.util.File());
+        context.put("Date", new igpp.util.Date());
        
         try
         {
@@ -127,14 +135,13 @@ public class Process
    			// Process arguments looking for variable context
    			for(String p : line.getArgs()) {
    				if(p.indexOf(':') != -1) {	// Load variable space from file.
-   					String[] part = p.split(":", 2);
-   					String name = part[0].trim();
-   					String filename = part[1].trim();
-   					if(part[1].toLowerCase().endsWith(".lbl")) { context.put(name, igpp.docgen.ParsePDS3.process(filename, includePath)); }
-   					else if(part[1].toLowerCase().endsWith(".txt")) { context.put(name, igpp.docgen.ParseList.process(filename)); }
-   					else if(part[1].toLowerCase().endsWith(".csv")) { context.put(name, igpp.docgen.ParseTable.process(filename, separator)); }
-   					else if(part[1].toLowerCase().endsWith(".tab")) { context.put(name, igpp.docgen.ParseTable.process(filename, separator)); }
-   					else { context.put(name, igpp.docgen.ParseTable.process(filename, separator)); }	// As table
+   					String fmt = me.getFormat(p);
+   					String name = me.getName(p);
+   					String filename = me.getFile(p);
+   					if(fmt.toLowerCase().equals("pds3")) { context.put(name, igpp.docgen.ParsePDS3.process(filename, includePath)); }
+   					if(fmt.toLowerCase().equals("pds3")) { context.put(name, igpp.docgen.ParsePDS3.process(filename, includePath)); }
+   					if(fmt.equals("list")) { context.put(name, igpp.docgen.ParseList.process(filename)); }
+   					if(fmt.equals("csv")) { context.put(name, igpp.docgen.ParseTable.process(filename, separator)); }
    				} else if(p.indexOf('=') != -1) {	// An assignment x=y
    					String[] part = p.split("=", 2);
    					String name = part[0].trim();
@@ -158,7 +165,9 @@ public class Process
 				// Skip common context.
 				if(key.equals("Integer")) continue;
 				if(key.equals("Double")) continue;
+				if(key.equals("Text")) continue;
 				if(key.equals("File")) continue;
+				if(key.equals("Date")) continue;
 				
 				// Show values in context.
 				String keyname = String.valueOf(key);
@@ -168,7 +177,7 @@ public class Process
 				
 				@SuppressWarnings("unchecked")			
 				HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
-				igpp.docgen.PrintMap.valueList(System.out, "", map);
+				igpp.docgen.ValueMap.print(System.out, "", map);
 			}
 		}
     
@@ -191,11 +200,30 @@ public class Process
         		outstream = new PrintStream(outfile);
         	}
         	StringWriter writer = new StringWriter();
-        	
+
+            if(format.equals("xml")) {	// Fix-up all values
+             	Object keys[] = context.getKeys();
+            	for(Object key : keys) {
+    				// Skip common context. Also not a HashMap
+    				if(key.equals("Integer")) continue;
+    				if(key.equals("Double")) continue;
+    				if(key.equals("Text")) continue;
+    				if(key.equals("File")) continue;
+    				if(key.equals("Date")) continue;
+
+    				String keyname = String.valueOf(key);
+        			@SuppressWarnings("unchecked")			
+        			HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
+        			igpp.docgen.ValueMap.encodeForXML(map);
+            	}
+            }
+            
             Velocity.mergeTemplate(template, "ISO-8859-1", context, writer);
             
             if(format.equals("xml")) {
             	outstream.print(igpp.xml.ToXML.stringToPlainXML(writer.toString()));
+            } else if(format.equals("html")) {
+                outstream.print(igpp.xml.ToXHTML.stringToXHTML(writer.toString()));
             } else if(format.equals("pds3")) {
             	pds.label.PDSLabel label = new pds.label.PDSLabel();
             	StringReader reader = new StringReader(writer.toString());
@@ -211,6 +239,7 @@ public class Process
         catch (Exception e )
         {
             System.out.println("Problem merging template : " + e );
+            e.printStackTrace();
         }
 
     }
@@ -237,4 +266,49 @@ public class Process
 		System.out.println(mAcknowledge);
 		System.out.println("");
 	}
+
+	
+	/**
+	 * Retrieve the name space of file spec. 
+	 **/
+	public String getFormat(String spec)
+	{
+		String filename = "";
+		String[] part = spec.split(":", 3);
+		if(part.length == 3) return(part[0]);
+		// Otherwise inspect extension
+		filename = part[part.length-1];
+		if(filename.toLowerCase().endsWith(".lbl")) { return("pds3"); }
+		if(filename.toLowerCase().endsWith(".cat")) { return("pds3"); }
+		if(filename.toLowerCase().endsWith(".fmt")) { return("pds3"); }
+		if(filename.toLowerCase().endsWith(".txt")) { return("list"); }
+		if(filename.toLowerCase().endsWith(".csv")) { return("csv"); }
+		if(filename.toLowerCase().endsWith(".tab")) { return("csv"); }
+		
+		return("csv");
+	}
+	
+	/**
+	 * Retrieve the name space of file spec. 
+	 **/
+	public String getName(String spec)
+	{
+		String name = "";
+		String[] part = spec.split(":", 3);
+		if(part.length > 1) {
+			name = part[part.length-2].trim();
+		}
+		return name.trim();
+	}
+	
+	/**
+	 * Retrieve the file name of file spec. 
+	 **/
+	public String getFile(String spec)
+	{
+		String[] part = spec.split(":", 3);
+		String filename = part[part.length-1].trim();
+		return filename.trim();
+	}
+	
 }

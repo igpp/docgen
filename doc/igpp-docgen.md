@@ -28,16 +28,18 @@ Usage: java igpp.docgen.Process [options] [file...]
 
 **Options:**
 >
-    -h,--help              Display this text  
-    -i,--include <arg>     Include Path. Path to look for files referenced
-                           with an INCLUDE or STRUCTURE pointer.  
-    -o,--output <arg>      Output. Output generated document to {file}. Default: System.out.  
-    -s,--separator <arg>   Separator. Pattern that separates values in
-                           tabular files. Default: is any number of spaces ([ ]+)  
-    -t,--template <arg>    Template. The template for the output using Apache
-                           Velocity Template Language.  
+    -3,--pds3 <arg>        PDS3. Parse file as though it is in PDS3 format.
+    -a,--table <arg>       Table. Parse file as though it is in tablet format. With the table format values are 
+                           expressed as rows with the first line being the varaible name.
+    -f,--format <arg>      Format. Format output with a given style. Allowed values are PDS3 and XML. Default: XML
+    -h,--help              Dispay this text
+    -i,--include <arg>     Include Path. Path to look for files referenced with an INCLUDE or STRUCTURE pointer.
+    -l,--list <arg>        List. Parse file as though it is in list format. With the list format values are 
+                           expressed as keyword=value, one per line.
+    -o,--output <arg>      Output. Output generated document to {file}. Default: System.out.
+    -s,--separator <arg>   Separator. Pattern that separates values in tabular files. Default: is a tab ()
+    -t,--template <arg>    Template. The template folder to search for templates file.
     -v,--verbose           Verbose. Show status at each step.
-    -f,--format            Format. Format output with a given style. Allowed values are PDS3 and XML. Default: XML
 
 **Variable Names in "options"**
 
@@ -144,6 +146,34 @@ to an Integer or double in order to perform math on the value. Two contexts are 
          Uses the java.lang.Double class.
          $Double.parseDouble($value) will transform a the string assigned 
          to $value into an double.
+
+**File Information**
+When generating metadata it is often necessary to determine some information about
+the file such the size of last modificaiton data. A context called "File" which is
+tied to the igpp.util.File class is defined. With the "File" context the size of a file
+can be obtained with a call like:
+
+    $File.getSize(pathname)
+
+An MD5 checksum for the file can be obtained with a call like:
+
+    $File.getMD5(pathname)
+
+See the igpp.util.File documentation for more details.
+
+**Date Conversion**
+Time values used in metadata often must confirm to a particular format. The most commonly
+used format is called ISO8601. A context called "Date" is tied to the igpp.util.Date class.
+With the "Date" context you can convert time values in just about any format to the
+ISO8601 format with the call:
+
+   $Date.getISO8601DateString(string)
+
+You can also get the time string for the current moment with a call to
+
+   $Date.getNow()
+
+See the igpp.util.Date documentation for more details.
 
 **Math**
 

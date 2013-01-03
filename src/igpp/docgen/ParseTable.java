@@ -60,9 +60,9 @@ public class ParseTable {
    			// Process arguments looking for variable context
    			for(String p : line.getArgs()) {
    				HashMap<String, Object> map = process(p, separator);
-   				igpp.docgen.PrintMap.valueList(outstream, "", map);
-   		        if(me.mVerbose) {
-   		        	PrintMap.valueList(System.out, "", map);
+   				igpp.docgen.ValueMap.print(outstream, "", map);
+   		        if(getVerbose()) {
+   		        	ValueMap.print(System.out, "", map);
    		        }
    			}
         } catch(Exception e) {

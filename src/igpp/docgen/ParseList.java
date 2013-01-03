@@ -58,9 +58,9 @@ public class ParseList {
    			// Process arguments looking for variable context
    			for(String p : line.getArgs()) {
    				HashMap<String, Object> map = process(p);
-   				igpp.docgen.PrintMap.valueList(outstream, "", map);
+   				igpp.docgen.ValueMap.print(outstream, "", map);
    		        if(me.mVerbose) {
-   		        	PrintMap.valueList(System.out, "", map);
+   		        	ValueMap.print(System.out, "", map);
    		        }
    			}
         } catch(Exception e) {

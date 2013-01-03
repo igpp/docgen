@@ -123,7 +123,7 @@ public class FromTable
 	        	}
 	        	
 		        if(me.mVerbose) {
-		        	igpp.docgen.PrintMap.valueList(System.out, "", dataMap);
+		        	igpp.docgen.ValueMap.print(System.out, "", dataMap);
 		        }
 		        
 		        // Else process template

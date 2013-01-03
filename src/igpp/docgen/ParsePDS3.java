@@ -67,9 +67,9 @@ public class ParsePDS3
    			// Process arguments looking for variable context
    			for(String p : line.getArgs()) {
    				HashMap<String, Object> map = process(p, includePath);
-   				igpp.docgen.PrintMap.valueList(outstream, "", map);
+   				igpp.docgen.ValueMap.print(outstream, "", map);
    		        if(me.mVerbose) {
-   		        	PrintMap.valueList(System.out, "", map);
+   		        	ValueMap.print(System.out, "", map);
    		        }
    			}
         } catch(Exception e) {

@@ -98,7 +98,7 @@ public class FromPDS3
 
         HashMap<String, Object> labelMap = igpp.docgen.ParsePDS3.process(labelFile, includePath);
         if(me.mVerbose) {
-        	igpp.docgen.PrintMap.valueList(System.out, "", labelMap);
+        	igpp.docgen.ValueMap.print(System.out, "", labelMap);
         }
         
         // Save map in "label" context
@@ -109,7 +109,7 @@ public class FromPDS3
         	HashMap<String, Object> dataMap = igpp.docgen.ParseList.process(dataFile);
             if(dataMap != null) context.put("data", dataMap);
             if(me.mVerbose) {
-            	igpp.docgen.PrintMap.valueList(System.out, "", dataMap);
+            	igpp.docgen.ValueMap.print(System.out, "", dataMap);
             }
         }
 
