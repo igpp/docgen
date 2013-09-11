@@ -30,7 +30,7 @@ import org.apache.commons.cli.HelpFormatter;
 public class FromPDS3
 {
 	private String	mVersion = "1.0.0";
-	private String mOverview = "FromPDS3 scans a PDS3 label file and generates a list values which can be used to populate a Apache Velocity template.\n"
+	private String mOverview = "FromPDS3 scans a PDS3 label file and generates a list of values which can be used to populate a Apache Velocity template.\n"
 									 + "Values are placed in the \"$label\" context."
 									 + "A supplemental data file may be provided as a flat table. The name for each field is taken from the first line."
 									 + "Lines begining with \"#\" are considered comments. ";

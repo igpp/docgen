@@ -1,0 +1,19 @@
+  OBJECT                = COLUMN                                              
+    NAME                = CALIBRATION_LEVEL                                   
+    DATA_TYPE           = CHARACTER                                           
+    START_BYTE          = 1                                                   
+    BYTES               = 6                                                   
+    DESCRIPTION         = "HFR internal calibration stimulus level and        
+                           attenuator state."                                 
+  END_OBJECT            = COLUMN                                              
+                                                                              
+  OBJECT                = COLUMN                                              
+    NAME                = FILTERS                                             
+    DATA_TYPE           = ASCII_REAL                                          
+    START_BYTE          = 7                                                   
+    BYTES               = 128                                                 
+    ITEMS               = 16                                                  
+    ITEM_BYTES          = 8                                                   
+    DESCRIPTION         = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."                             
+  END_OBJECT            = COLUMN                                              

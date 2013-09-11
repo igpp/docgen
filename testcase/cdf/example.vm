@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-model href="http://pds.nasa.gov/pds4/pds/v03/PDS4_PDS_0310b.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?> 
+<Doc
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ds="http://pds.nasa.gov/pds4/mgs/v00"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/mgs/v00 http://pds.nasa.gov/pds4/mgs/v00/mgs_0_0.xsd"
+   >
+   <ds:name>$cdf.filename</ds:name>
+   <copyright>$cdf.copyright</copyright>0
+   <version>$cdf.version</version>
+   <attributes>
+#foreach ($attribute in $cdf.attributes)
+      <attribute>$attribute.name</attribute>
+#end
+   </attributes>
+   <variables>
+#foreach ($variable in $cdf.variables)
+      <variable>$variable.name</variable>
+#foreach ($attribute in $variable.attributes)
+         <attribute>
+            <name>$attribute.name</name>
+            <value>$attribute.getValueString(", ")</value>
+         </attribute>
+#end
+      </variable>
+#end
+   </variables>
+   <!-- Data Variables -->
+   <variables>
+   <count>$cdf.variables().size()</count>
+   <count>$cdf.data.size()</count>
+#foreach ($variable in $cdf.data)
+      <variable>$variable.name</variable>
+         <startByte>$variable.getStartByte()</startByte>
+         <index>$variable.getIndex()</index>
+         <dims>
+#foreach ($dim in $variable.getDims())
+            <dim>$dim</dim>
+#end
+         </dims>
+         <ValidMin>$variable.getAttributeValue("VALIDMIN", ", ")</ValidMin>
+         <ValidMax>$variable.getAttributeValue("VALIDMAX", ", ")</ValidMax>
+#foreach ($attribute in $variable.attributes)
+         <attribute>
+            <name>$attribute.name</name>
+            <value>$attribute.getValueString(", ")</value>
+         </attribute>
+#end
+      </variable>
+#end
+   </variables>
+</Doc>

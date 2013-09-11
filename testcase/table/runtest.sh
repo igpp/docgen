@@ -1,0 +1,1 @@
+java -Djava.ext.dirs=../../lib -jar ../../build/jar/igpp-docgen-1.0.4.jar example.vm

@@ -126,9 +126,9 @@ public class ParseList {
 	        		map.put(tag, list);
 	        	} else {
 	        		map.put(tag, val);
-	        	}
-	        	
+	        	}	        	
 	        }
+	        data.close();
         } catch (Exception e ) {
             System.out.println("Problem reading table : " + e );
             e.printStackTrace();

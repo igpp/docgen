@@ -16,9 +16,9 @@ public class ParseTable {
 	private String mVersion = "1.0.0";
 	private String mOverview = "Parse text file containing a delimited table of values and generate a\n"
 								+ "a HashMap list values which can be used with Apache Velocity tools.\n"
-								+ "Field names are taken from the first record. Comments are lines that\n"
-								+ "begin with \"#\" and are ignore. The array of records is assigned the\n"
-								+ "name \"record\"."
+								+ "Field names are taken from the first non-comment record. Comments\n"
+								+ "are lines that begin with \"#\" and are ignore. The array of records\n"
+								+ "is assigned the name \"record\".\n"
 								+ "\n";
 	private String mAcknowledge = "Development funded by NASA's PDS project at UCLA.";
 
@@ -40,7 +40,7 @@ public class ParseTable {
 
         ParseTable me = new ParseTable();
         String outfile = null;
-        String separator = "\\t";
+        String separator = ","; // "\\t";
 
 		CommandLineParser parser = new PosixParser();
         try
@@ -97,6 +97,13 @@ public class ParseTable {
 	
 	/**
 	 * Process a flat textual table.
+	 * Items placed in the HashMap:
+	 *
+	 * name: The name of the file.
+	 * description: The text contained in comments.
+	 * fields: An array of field names.
+	 * record: An array of records with each record containing a named value with the name matching
+	 * the field value of the first non-commented record. 
 	 **/
 	static public HashMap<String, Object> process(String filename, String separator)
 	{
@@ -106,16 +113,38 @@ public class ParseTable {
         	if(mVerbose) System.out.println("Reading: " + filename);
 	        BufferedReader data = new BufferedReader(new FileReader(filename));
 	        String buffer;
+	        String description = "";
 	        String[] fieldNames = null;
 	        
-	        try {
-	        	buffer = data.readLine();
-	        	fieldNames = buffer.split(separator);
-	        } catch(Exception e) {
-	        	System.out.println("Unable to parse data table file. " + e.getMessage());
-	        	return map;
+	        map.put("name", filename);
+	        while((buffer = data.readLine()) != null) {
+		        try {
+		        	if(buffer.startsWith("#")) {	// Comment
+		        		description += buffer.substring(1);	// Drop "#"
+		        		continue;	// Skip comments
+		        	}
+		        	fieldNames = buffer.split(separator);
+		        	break;
+		        } catch(Exception e) {
+		        	System.out.println("Unable to parse data table file. " + e.getMessage());
+			        data.close();
+		        	return map;
+		        }
 	        }
+	        data.close();
 	        
+	        if(fieldNames == null) { 
+	        	System.out.println("Unable to find record with field names.");
+	        	return map;
+        	}
+
+        	ArrayList<String> list = new ArrayList<String>();
+        	for(int i = 0; i < fieldNames.length; i++) {
+        		list.add(fieldNames[i]);
+        	}
+        	map.put("description", description);
+	        map.put("fields", list);
+
 	        ArrayList<HashMap<String, Object>> records = new ArrayList<HashMap<String, Object>>();
 	        
 	        int lineCnt = 0;

@@ -1,5 +1,0 @@
-<Doc>
-   <name>$data.name</name>
-   <project>$data.project</project>
-   <description>Hello from $data.name in the $data.project project.</description>
-</Doc>

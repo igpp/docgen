@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>igpp.docgen/Examples</title>
+    <meta name="author" content="Todd King" />
+    <meta http-equiv="Content-Language" content="en" />
+    <link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../template.js"> </script>
+    <script type="text/javascript" src="sidebar.js"> </script>
+   </head>
+   <body>
+<div class="container">
+   <script>header();</script>
+   <script>sidebar();</script>
+   <div class="span9">
+   	<p>
+      These examples illustrate how to use the igpp.docgen tool which 
+      is a document generator based on 
+      <a href="http://en.wikipedia.org/wiki/Apache_Velocity">Apache Velocity</a>. 
+      The tool can process template documents written in the 
+      <a href="http://velocity.apache.org/engine/devel/user-guide.html">Velocity Template Language (VTL)</a>.
+      It can read PDS3 labels, text files containing keyword=value pairs, and 
+      spreadsheets in CSV or TAB format. The content of a processed file are 
+      assigned to varaibles in separate Velocity contexts and can be referenced 
+      individually in the Velocity template file. The output format can be plain text 
+      or well formatted PDS3 or XML.
+      </p>
+      
+      <h2><a name="Velocity">Brief Introduction to Velocity</a></h2>
+      <p>
+      Apache Velocity is a template processing engine that provides a template language
+      for specifying where and how variables are to occur in a generated document. In 
+      the igpp.docgen implementation, Velocity variables are assigned to a "context" 
+      and can be reference with the syntax of leading "$" character followed by a variable 
+      name (VTL Identifier). For example, the variable "name" in the "list" context would be
+      referenced as:
+      </p>
+      <div class="code">
+<pre>
+$list.name
+</pre>
+      </div>
+      <p>Within Velocity a variable is an object and may have methods (functions)
+         which can used. igpp.docgen has pre-defined variables which can used
+         to process user defined varaibles. They are:
+         <ul>
+            <li><a href="http://docs.oracle.com/javase/6/docs/api/index.html?java/lang/Integer.html">Integer</a></li>
+            <li><a href="http://docs.oracle.com/javase/6/docs/api/index.html?java/lang/Double.html">Double</a></li>
+            <li>Text</li>
+            <li><a href="http://docs.oracle.com/javase/6/docs/api/index.html?java/lang/File.html">File</a></li>
+            <li><a href="http://docs.oracle.com/javase/6/docs/api/index.html?java/lang/Date.html">Date</a></li>
+         </ul>
+         How to use these variables is described in the advanced examples. 
+      </p>
+      <p>First we'll begin with simple examples.</p>
+      <h2><a name="Lists">Using Keyword=Value Lists</a></h2>
+      <p>With igpp.docgen values can be set using a Keyword=Value syntax. 
+         This can be done both on the command-line and as a collection of 
+         value lists in a file.
+      </p>
+      <p>
+      See <a href="list/index.html">Example</a>
+      </p>
+   
+      <h2><a name="Tables">Using CSV Tables</a></h2>
+      <p>Support for CSV and TAB delimited tables is part of igpp.docgen. In a table
+      any line beginning with a "#" is considered a comment and ignored by the parser.
+      The first non-commented line is used to determine the names for each field and 
+      how many fields to expect in each record. The igpp.docgen parser creates a 
+      an array of record in the generated context. Each record contains a named
+      value which matches the name of the fields and is assigned the value found 
+      in the record.
+      </p>
+      
+      <p>
+      See <a href="table/index.html">Examples</a>
+      </p>
+      <p>
+       The igpp.docgen tool was developed using Java and will run on any platform with a supported 
+       Java Runtime Environment (JRE). The software was specifically developed under Java version 1.6 
+       and has only been tested with this version. You can determine which version of Java you are running
+       with the command:
+       </p>
+       <div class="code">
+          <pre>% java -version</pre>
+          <pre>java version "1.6.0_26"</pre>
+          <pre>Java(TM) SE Runtime Environment (build 1.6.0_26-b03-384-10M3425)</pre>
+          <pre>Java HotSpot(TM) 64-Bit Server VM (build 20.1-b02-384, mixed mode)</pre>
+       </div>
+      <h2><a name="pds3">Using PDS3 Labels</a></h2>
+      <p>Download the <i>igpp.docgen</i> package from the IGPP 
+      	<a class="externalLink" href="http://release.igpp.ucla.edu/igpp/docgen/" target="_blank">web site</a> 
+      	site. The binary distribution is available in identical zip or tar/gzip packages. 
+      	The installation directory may vary from environment to environment but in UNIX-based environments 
+      	it is typical to install software packages in the <i>/usr/local</i> directory and in Windows-based 
+      	environments it is typical to install software packages in the <i>C:\Program Files</i> directory. 
+      	Unpack the selected binary distribution file with the following command:
+      </p>
+      <div class="code">
+          <pre>% unzip igpp-docgen-1.0.1.zip</pre>
+      </div>
+</div><!-- span -->
+<script>footer();</script>
+</div><!-- container -->
+</body>
+</html>

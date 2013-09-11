@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spase xmlns="http://www.spase-group.org/data/schema">
+<Version>2.2.2</Version>
+<NumericalData>
+   <ResourceID>spase://VMO/NumericalData/PDS/$ds.DATA_SET[0].DATA_SET_ID.replaceAll("/", "_")</ResourceID>
+   <ResourceHeader>
+      <ResourceName>$label.INSTRUMENT_HOST_NAME $label.INSTRUMENT_NAME</ResourceName>
+      <AlternateName>$Text.trim($ds.DATA_SET[0].DATA_SET_INFORMATION[0].DATA_SET_NAME)</AlternateName>
+      <ReleaseDate>$Date.getISO8601DateString($ds.DATA_SET[0].DATA_SET_INFORMATION[0].DATA_SET_RELEASE_DATE)</ReleaseDate>
+      <Description>$ds.DATA_SET[0].DATA_SET_INFORMATION[0].DATA_SET_TERSE_DESC</Description>
+      <Acknowledgement>$list.Acknowledgement</Acknowledgement>
+      <Contact>
+         <PersonID>$list.PIPersonID</PersonID>
+         <Role>PrincipalInvestigator</Role>
+      </Contact>
+      <Contact>
+         <PersonID>$list.COIPersonID</PersonID>
+         <Role>CoInvestigator</Role>
+      </Contact>
+      <Contact>
+         <PersonID>$list.MetadataPersonID</PersonID>
+         <Role>MetadataContact</Role>
+      </Contact>
+      <InformationURL>
+         <Name>PDS/PPI</Name>
+         <URL>http://ppi.pds.nasa.gov/</URL>
+         <Description></Description>
+      </InformationURL>
+   </ResourceHeader>
+   <AccessInformation>
+      <RepositoryID>spase://SMWG/Respository/PDS/PPI</RepositoryID>
+      <Availability>Online</Availability>
+      <AccessRights>Open</AccessRights>
+      <AccessURL>
+         <Name>$label.INSTRUMENT_HOST_ID $label.INSTRUMENT_ID</Name>
+         <URL>http://ppi.pds.nasa.gov/search/view/?f=yes&amp;id=pds://PPI/$ds.DATA_SET[0].DATA_SET_ID.replaceAll("/", "_"))</URL>
+         <Description>$label.INSTRUMENT_HOST_NAME $label.INSTRUMENT_NAME</Description>
+      </AccessURL>
+      <Format>$list.Format</Format>
+      <Encoding>$list.Encoding</Encoding>
+      <Acknowledgement>Please acknowledge the P.I. and NASA's Planetary Plasma Interactions (PPI) Node of the Planetary Data System (PDS)</Acknowledgement>
+   </AccessInformation>
+   <ProviderResourceName>$cat.VOLUME[0].DATA_SET_ID</ProviderResourceName>
+   <ProviderVersion>$cat.VOLUME[0].VOLUME_VERSION_ID</ProviderVersion>
+   <InstrumentID>$list.InstrumentID</InstrumentID>
+   <MeasurementType>$list.MeasurementType</MeasurementType>
+   <TemporalDescription>
+      <TimeSpan>
+         <StartDate>$Date.getISO8601DateString($ds.DATA_SET[0].DATA_SET_INFORMATION[0].START_TIME)</StartDate>
+#if ($ds.DATA_SET[0].DATA_SET_INFORMATION[0].STOP_TIME == "NULL") 
+         <RelativeStopDate>PT00:00:00</RelativeStopDate>
+#else
+         <StopDate>$Date.getISO8601DateString($ds.DATA_SET[0].DATA_SET_INFORMATION[0].STOP_TIME)</StopDate>
+#end
+      </TimeSpan>
+   </TemporalDescription>
+#foreach ($item in $ds.DATA_SET[0].DATA_SET_TARGET)
+#if ($Text.isInList($item.TARGET_NAME, $list.Planets))
+#if ($item.TARGET_NAME == "SOLAR_SYSTEM")
+   <ObservedRegion>Heliosphere</ObservedRegion>
+#else
+   <ObservedRegion>$Text.toProperCase($item.TARGET_NAME.toLowerCase())</ObservedRegion>
+#end
+#end
+#end
+   <Keyword>$cat.VOLUME[0].SPACECRAFT_NAME</Keyword>
+#foreach ($item in $ds.DATA_SET[0].DATA_SET_TARGET)
+   <Keyword>$Text.toProperCase($item.TARGET_NAME.toLowerCase().replaceAll("_", " "))</Keyword>
+#end
+#foreach ($item in $ds.DATA_SET[0].DATA_SET_MISSION)
+   <Keyword>$item.MISSION_NAME</Keyword>
+#end
+#foreach ($table in $label.TABLE)
+#foreach( $column in $table.COLUMN) 
+   <Parameter>
+      <Name>$column.NAME</Name>
+      <ParameterKey>$column.NAME</ParameterKey>
+      <Description>$column.DESCRIPTION</Description>
+#if($column.UNIT) <Units>$column.UNIT</Units> #end
+#if ($column.ITEMS)
+      <Structure>
+         <Size>$column.ITEMS</Size>
+         <Description>Array of values</Description>
+      </Structure>
+#end
+#if ($column.DATA_TYPE == "TIME")
+      <Support>
+         <SupportQuantity>Temporal</SupportQuantity>
+      </Support>
+#else
+      <Wave>
+         <WaveType>Electromagnetic</WaveType>
+#if ($column.NAME == "ELECTRIC_SPECTRAL_DENSITIES") 
+         <WaveQuantity>ACElectricField</WaveQuantity>
+#else
+         <WaveQuantity>ACMagneticField</WaveQuantity>
+#end
+      </Wave>
+#end
+    </Parameter>
+#end
+#end
+</NumericalData>
+</Spase>

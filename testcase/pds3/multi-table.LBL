@@ -1,0 +1,1247 @@
+PDS_VERSION_ID               = PDS3
+/* label standards identifiers PDS Version 3.5 */
+
+DESCRIPTION                  = "T2007002_CAL0.TAB contains internal calibrations for the       
+    Cassini Radio and Plasma Wave (RPWS) high frequency receiver (HFR) for    
+    2007-002T00:00:03.127 and includes the following targets:                 
+    SATURN,SOLAR SYSTEM."
+
+
+/* pds label for rpws low rate full */
+
+RECORD_TYPE                  = FIXED_LENGTH
+RECORD_BYTES                 = 140
+FILE_RECORDS                 = 594
+
+/* pointers to start records of objects in file, std ref3.5:5.3.3.2 */
+/*Band A */
+^HFRA_CAL_LEVELS_AGC_TABLE   = ("T2007002_CAL0.TAB", 4) /*Agc */
+^HFRA_CAL_LEVELS_AUTOEU_TABLE= ("T2007002_CAL0.TAB", 12) /*Auto Eu*/
+^HFRA_CAL_LEVELS_AUTOEW_TABLE= ("T2007002_CAL0.TAB", 28) /*Auto Ew*/
+^HFRA_CAL_LEVELS_AUTOEV_TABLE= ("T2007002_CAL0.TAB", 44) /*Auto Ev*/
+^HFRA_CAL_LEVELS_AUTOEZ_TABLE= ("T2007002_CAL0.TAB", 60) /*Auto Ez*/
+^HFRA_CAL_LEVELS_CMAGEUEW_TABLE = ("T2007002_CAL0.TAB", 76) /*CmagEuEw*/
+^HFRA_CAL_LEVELS_CMAGEVEZ_TABLE = ("T2007002_CAL0.TAB", 92) /*CmagEvEz*/
+^HFRA_CAL_LEVELS_CPHSEUEW_TABLE = ("T2007002_CAL0.TAB", 108) /*CphsEuEw*/
+^HFRA_CAL_LEVELS_CPHSEVEZ_TABLE = ("T2007002_CAL0.TAB", 124) /*CphsEvEz*/
+/*Band B */
+^HFRB_CAL_LEVELS_AGC_TABLE   = ("T2007002_CAL0.TAB", 140) /*Agc */
+^HFRB_CAL_LEVELS_AUTOEU_TABLE= ("T2007002_CAL0.TAB", 148) /*Auto Eu*/
+^HFRB_CAL_LEVELS_AUTOEW_TABLE= ("T2007002_CAL0.TAB", 164) /*Auto Ew*/
+^HFRB_CAL_LEVELS_AUTOEV_TABLE= ("T2007002_CAL0.TAB", 180) /*Auto Ev*/
+^HFRB_CAL_LEVELS_AUTOEZ_TABLE= ("T2007002_CAL0.TAB", 196) /*Auto Ez*/
+^HFRB_CAL_LEVELS_CMAGEUEW_TABLE = ("T2007002_CAL0.TAB", 212) /*CmagEuEw*/
+^HFRB_CAL_LEVELS_CMAGEVEZ_TABLE = ("T2007002_CAL0.TAB", 228) /*CmagEvEz*/
+^HFRB_CAL_LEVELS_CPHSEUEW_TABLE = ("T2007002_CAL0.TAB", 244) /*CphsEuEw*/
+^HFRB_CAL_LEVELS_CPHSEVEZ_TABLE = ("T2007002_CAL0.TAB", 260) /*CphsEvEz*/
+/*Band C */
+^HFRC_CAL_LEVELS_AGC_TABLE   = ("T2007002_CAL0.TAB", 276) /*Agc */
+^HFRC_CAL_LEVELS_AUTOEU_TABLE= ("T2007002_CAL0.TAB", 284) /*Auto Eu*/
+^HFRC_CAL_LEVELS_AUTOEW_TABLE= ("T2007002_CAL0.TAB", 300) /*Auto Ew*/
+^HFRC_CAL_LEVELS_AUTOEV_TABLE= ("T2007002_CAL0.TAB", 316) /*Auto Ev*/
+^HFRC_CAL_LEVELS_AUTOEZ_TABLE= ("T2007002_CAL0.TAB", 332) /*Auto Ez*/
+^HFRC_CAL_LEVELS_CMAGEUEW_TABLE = ("T2007002_CAL0.TAB", 348) /*CmagEuEw*/
+^HFRC_CAL_LEVELS_CMAGEVEZ_TABLE = ("T2007002_CAL0.TAB", 364) /*CmagEvEz*/
+^HFRC_CAL_LEVELS_CPHSEUEW_TABLE = ("T2007002_CAL0.TAB", 380) /*CphsEuEw*/
+^HFRC_CAL_LEVELS_CPHSEVEZ_TABLE = ("T2007002_CAL0.TAB", 396) /*CphsEvEz*/
+/*Band HF1*/
+^HFRHF1_CAL_LEVELS_7ON_TABLE = ("T2007002_CAL0.TAB", 412) /* 7_on   */
+^HFRHF1_CAL_LEVELS_5OFF_TABLE= ("T2007002_CAL0.TAB", 428) /* 5_off  */
+^HFRHF1_FILTER_AGC_F19_TABLE = ("T2007002_CAL0.TAB", 444) /* F19    */
+^HFRHF1_FILTER_CAL_F19_TABLE = ("T2007002_CAL0.TAB", 449) /* F19    */
+/*Band HF2*/
+^HFRHF2_CAL_LEVELS_7ONA_TABLE= ("T2007002_CAL0.TAB", 461) /* 7_on   */
+^HFRHF2_CAL_LEVELS_7ONB_TABLE= ("T2007002_CAL0.TAB", 476) /* 7_on   */
+^HFRHF2_CAL_LEVELS_7ONC_TABLE= ("T2007002_CAL0.TAB", 491) /* 7_on   */
+^HFRHF2_CAL_LEVELS_7OND_TABLE= ("T2007002_CAL0.TAB", 506) /* 7_on   */
+^HFRHF2_CAL_LEVELS_5OFFA_TABLE = ("T2007002_CAL0.TAB", 522) /* 5_off  */
+^HFRHF2_CAL_LEVELS_5OFFB_TABLE = ("T2007002_CAL0.TAB", 537) /* 5_off  */
+^HFRHF2_CAL_LEVELS_5OFFC_TABLE = ("T2007002_CAL0.TAB", 552) /* 5_off  */
+^HFRHF2_CAL_LEVELS_5OFFD_TABLE = ("T2007002_CAL0.TAB", 567) /* 5_off  */
+^HFRHF2_CAL_LEVELS_F15_TABLE = ("T2007002_CAL0.TAB", 583) /* F15    */
+
+/* identification data elements - data product labels, std ref3.5:5.3.4.1 */
+
+DATA_SET_ID                  = "CO-V/E/J/S/SS-RPWS-3-RDR-LRFULL-V1.0"
+STANDARD_DATA_PRODUCT_ID     = RPWS_LOW_RATE_FULL
+PRODUCT_TYPE                 = DATA
+PRODUCT_ID                   = T2007002_CAL0_V1
+INSTRUMENT_HOST_NAME         = "CASSINI ORBITER"
+INSTRUMENT_HOST_ID           = CO
+INSTRUMENT_NAME              = "RADIO AND PLASMA WAVE SCIENCE"
+INSTRUMENT_ID                = RPWS
+SECTION_ID                   = HFR
+MISSION_PHASE_NAME           = "TOUR"
+TARGET_NAME                  = {"SATURN", "SOLAR SYSTEM"}
+ORBIT_NAME                   = "36"
+START_TIME                   = 2007-002T00:00:03.127Z
+STOP_TIME                    = 2007-002T00:00:03.127Z
+SPACECRAFT_CLOCK_START_COUNT = "1/1546389166.128"
+SPACECRAFT_CLOCK_STOP_COUNT  = "1/1546389166.128"
+PRODUCT_CREATION_TIME        = 2007-01-17
+
+/* table objects */
+
+OBJECT                       = HFRA_CAL_LEVELS_AGC_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 4
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration active antenna stimulus."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = CAL_LEVEL
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 96
+    ITEMS                    = 12
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of twelve calibration   
+                           levels for HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRA_CAL_LEVELS_AGC_TABLE
+
+OBJECT                       = HFRA_CAL_LEVELS_AUTOEU_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRA_CAL_LEVELS_AUTOEU_TABLE
+
+OBJECT                       = HFRA_CAL_LEVELS_AUTOEW_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRA_CAL_LEVELS_AUTOEW_TABLE
+
+OBJECT                       = HFRA_CAL_LEVELS_AUTOEV_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRA_CAL_LEVELS_AUTOEV_TABLE
+
+OBJECT                       = HFRA_CAL_LEVELS_AUTOEZ_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRA_CAL_LEVELS_AUTOEZ_TABLE
+
+OBJECT                       = HFRA_CAL_LEVELS_CMAGEUEW_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRA_CAL_LEVELS_CMAGEUEW_TABLE
+
+OBJECT                       = HFRA_CAL_LEVELS_CMAGEVEZ_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRA_CAL_LEVELS_CMAGEVEZ_TABLE
+
+OBJECT                       = HFRA_CAL_LEVELS_CPHSEUEW_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRA_CAL_LEVELS_CPHSEUEW_TABLE
+
+OBJECT                       = HFRA_CAL_LEVELS_CPHSEVEZ_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRA_CAL_LEVELS_CPHSEVEZ_TABLE
+
+OBJECT                       = HFRB_CAL_LEVELS_AGC_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 4
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration active antenna stimulus."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = CAL_LEVEL
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 96
+    ITEMS                    = 12
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of twelve calibration   
+                           levels for HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRB_CAL_LEVELS_AGC_TABLE
+
+OBJECT                       = HFRB_CAL_LEVELS_AUTOEU_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRB_CAL_LEVELS_AUTOEU_TABLE
+
+OBJECT                       = HFRB_CAL_LEVELS_AUTOEW_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRB_CAL_LEVELS_AUTOEW_TABLE
+
+OBJECT                       = HFRB_CAL_LEVELS_AUTOEV_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRB_CAL_LEVELS_AUTOEV_TABLE
+
+OBJECT                       = HFRB_CAL_LEVELS_AUTOEZ_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRB_CAL_LEVELS_AUTOEZ_TABLE
+
+OBJECT                       = HFRB_CAL_LEVELS_CMAGEUEW_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRB_CAL_LEVELS_CMAGEUEW_TABLE
+
+OBJECT                       = HFRB_CAL_LEVELS_CMAGEVEZ_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRB_CAL_LEVELS_CMAGEVEZ_TABLE
+
+OBJECT                       = HFRB_CAL_LEVELS_CPHSEUEW_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRB_CAL_LEVELS_CPHSEUEW_TABLE
+
+OBJECT                       = HFRB_CAL_LEVELS_CPHSEVEZ_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRB_CAL_LEVELS_CPHSEVEZ_TABLE
+
+OBJECT                       = HFRC_CAL_LEVELS_AGC_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 4
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration active antenna stimulus."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = CAL_LEVEL
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 96
+    ITEMS                    = 12
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of twelve calibration   
+                           levels for HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRC_CAL_LEVELS_AGC_TABLE
+
+OBJECT                       = HFRC_CAL_LEVELS_AUTOEU_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRC_CAL_LEVELS_AUTOEU_TABLE
+
+OBJECT                       = HFRC_CAL_LEVELS_AUTOEW_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRC_CAL_LEVELS_AUTOEW_TABLE
+
+OBJECT                       = HFRC_CAL_LEVELS_AUTOEV_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRC_CAL_LEVELS_AUTOEV_TABLE
+
+OBJECT                       = HFRC_CAL_LEVELS_AUTOEZ_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRC_CAL_LEVELS_AUTOEZ_TABLE
+
+OBJECT                       = HFRC_CAL_LEVELS_CMAGEUEW_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRC_CAL_LEVELS_CMAGEUEW_TABLE
+
+OBJECT                       = HFRC_CAL_LEVELS_CMAGEVEZ_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRC_CAL_LEVELS_CMAGEVEZ_TABLE
+
+OBJECT                       = HFRC_CAL_LEVELS_CPHSEUEW_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRC_CAL_LEVELS_CPHSEUEW_TABLE
+
+OBJECT                       = HFRC_CAL_LEVELS_CPHSEVEZ_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CALIBRATION_LEVEL
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 6
+    DESCRIPTION              = "HFR internal calibration stimulus level and        
+                           attenuator state."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTERS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 7
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from each of sixteen filters for  
+                           HFR bands A, B, or C."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRC_CAL_LEVELS_CPHSEVEZ_TABLE
+
+OBJECT                       = HFRHF1_CAL_LEVELS_7ON_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF1_CAL_LEVELS_7ON_TABLE
+
+OBJECT                       = HFRHF1_CAL_LEVELS_5OFF_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF1_CAL_LEVELS_5OFF_TABLE
+
+OBJECT                       = HFRHF1_FILTER_AGC_F19_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 4
+  COLUMNS                    = 5
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTER_1
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 8
+    ITEMS                    = 1
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf1 with  
+                           one filter."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTER_2
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 26
+
+    BYTES                    = 8
+    ITEMS                    = 1
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf1 with  
+                           two filters."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTER_4
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 52
+
+    BYTES                    = 8
+    ITEMS                    = 1
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf1 with  
+                           four filters."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTER_8
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 103
+
+    BYTES                    = 8
+    ITEMS                    = 1
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf1 with  
+                           eight filters."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF1_FILTER_AGC_F19_TABLE
+
+OBJECT                       = HFRHF1_FILTER_CAL_F19_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 8
+  COLUMNS                    = 5
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTER_1
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 8
+    ITEMS                    = 1
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf1 with  
+                           one filter."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTER_2
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 21
+
+    BYTES                    = 16
+    ITEMS                    = 2
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf1 with  
+                           two filters."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTER_4
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 40
+
+    BYTES                    = 32
+    ITEMS                    = 4
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf1 with  
+                           four filters."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = FILTER_8
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 75
+
+    BYTES                    = 64
+    ITEMS                    = 8
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf1 with  
+                           eight filters."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF1_FILTER_CAL_F19_TABLE
+
+OBJECT                       = HFRHF2_CAL_LEVELS_7ONA_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF2_CAL_LEVELS_7ONA_TABLE
+
+OBJECT                       = HFRHF2_CAL_LEVELS_7ONB_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF2_CAL_LEVELS_7ONB_TABLE
+
+OBJECT                       = HFRHF2_CAL_LEVELS_7ONC_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF2_CAL_LEVELS_7ONC_TABLE
+
+OBJECT                       = HFRHF2_CAL_LEVELS_7OND_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF2_CAL_LEVELS_7OND_TABLE
+
+OBJECT                       = HFRHF2_CAL_LEVELS_5OFFA_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF2_CAL_LEVELS_5OFFA_TABLE
+
+OBJECT                       = HFRHF2_CAL_LEVELS_5OFFB_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF2_CAL_LEVELS_5OFFB_TABLE
+
+OBJECT                       = HFRHF2_CAL_LEVELS_5OFFC_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF2_CAL_LEVELS_5OFFC_TABLE
+
+OBJECT                       = HFRHF2_CAL_LEVELS_5OFFD_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 2
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = STEPS
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 128
+    ITEMS                    = 16
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF2_CAL_LEVELS_5OFFD_TABLE
+
+OBJECT                       = HFRHF2_CAL_LEVELS_F15_TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 140
+  ROWS                       = 12
+  COLUMNS                    = 3
+  DESCRIPTION                = ""
+  OBJECT                     = COLUMN
+    NAME                     = CORRELATION_PRODUCT
+    DATA_TYPE                = CHARACTER
+    START_BYTE               = 1
+    BYTES                    = 9
+    DESCRIPTION              = "HFR auto and cross correlation products."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = CAL_ATTN_ON
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 10
+
+    BYTES                    = 48
+    ITEMS                    = 6
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf2 with  
+                           one filter."
+  END_OBJECT                 = COLUMN
+
+  OBJECT                     = COLUMN
+    NAME                     = CAL_ATTN_OFF
+    DATA_TYPE                = ASCII_REAL
+    START_BYTE               = 62
+
+    BYTES                    = 48
+    ITEMS                    = 6
+    ITEM_BYTES               = 8
+    DESCRIPTION              = "Calibration data from a step of HFR band hf2 with  
+                           one filters."
+  END_OBJECT                 = COLUMN
+END_OBJECT                   = HFRHF2_CAL_LEVELS_F15_TABLE
+
+
+END

@@ -1,4 +1,0 @@
-name=Example
-project=docgen
-version=1
-multi={one, two, three}

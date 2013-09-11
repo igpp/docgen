@@ -1,0 +1,19 @@
+  OBJECT                = COLUMN                                              
+    NAME                = CORRELATION_PRODUCT                                 
+    DATA_TYPE           = CHARACTER                                           
+    START_BYTE          = 1                                                   
+    BYTES               = 9                                                   
+    DESCRIPTION         = "HFR auto and cross correlation products."          
+  END_OBJECT            = COLUMN                                              
+                                                                              
+  OBJECT                = COLUMN                                              
+    NAME                = STEPS                                               
+    DATA_TYPE           = ASCII_REAL                                          
+    START_BYTE          = 10                                                  
+                                                                              
+    BYTES               = 128                                                 
+    ITEMS               = 16                                                  
+    ITEM_BYTES          = 8                                                   
+    DESCRIPTION         = "Calibration data from the steps of HFR bands hf1   
+                           or hf2."                                           
+  END_OBJECT            = COLUMN                                              

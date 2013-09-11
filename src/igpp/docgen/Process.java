@@ -19,18 +19,15 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.VelocityContext;
 
 //import org.apache.commons.cli.*;
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.PosixParser;
-import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.HelpFormatter;
 
 public class Process
 {
-	private String mVersion = "1.0.0";
+	private String mVersion = "1.0.6";
 	private String mOverview = "Defines variables that can be used to populate a Apache Velocity template.\n"
 			 + "A Velocity template contains text and references to  variables. The pds.docgen executable is\n"
 			 + "used to defined the value assigned to variables. Variables can be defined on the command line,\n" 
@@ -41,10 +38,11 @@ public class Process
              + "\n"
 			 + "   [format]:name:file\n"
              + "\n"
-			 + "files ending in \".lbl\", \".cat\", or \".fmt\" are parsed as PDS3 label files. \n"
-             + "Files ending in \".txt\" are parsed as variable lists containing one keyword=value per line. \n"
+			 + "Files ending in \".lbl\", \".cat\", or \".fmt\" are parsed as PDS3 label files. \n\n"
+             + "Files ending in \".txt\" are parsed as variable lists containing one keyword=value per line. \n\n"
+             + "Files ending in \".cdf\" are parsed as CDF files.\n\n"
 			 + "Lines begining with \"#\" are considered comments. Files ending in \".csv\" or \n"
-             + "\".tab\" are processed as delimited text files with the first line containing field names. \n"
+             + "\".tab\" are processed as delimited text files with the first line containing field names. \n\n"
 			 + "\n"
              + "The format determined by the filename extension can be overriden with a \"format\" designator \n"
 			 + "prefix in the context options. Supported format designators are \"pds3\" for PDS3 format \n"
@@ -64,7 +62,7 @@ public class Process
 		mAppOptions.addOption( "t", "template", true, "Template. The template folder to search for templates file." );
 		mAppOptions.addOption( "i", "include", true, "Include Path. Path to look for files referenced with an INCLUDE or STRUCTURE pointer." );
 		mAppOptions.addOption( "s", "separator", true, "Separator. Pattern that separates values in tabular files. Default: is a tab (\t)" );
-		mAppOptions.addOption( "f", "format", true, "Format. Format output with a given style. Allowed values are PDS3 and XML. Default: XML" );
+		mAppOptions.addOption( "f", "format", true, "Format. Format output with a given style. Allowed values are PDS3, XML, HTML and Plain. Default: XML" );
 	}
 
 	public static void main( String args[] )
@@ -76,7 +74,7 @@ public class Process
         String template = null;
         String templatePath = ".";
         String includePath = null;
-        String separator = "\\t";
+        String separator = "\\t"; // ",";
         String format = "xml";
 
         // Check if any options - if none show help and exit
@@ -105,11 +103,14 @@ public class Process
         VelocityContext context = new VelocityContext();
         
         // Default context for working with transforms
+        context.put("Long", new Long(0));
         context.put("Integer", new Integer(0));
         context.put("Double", new Double(0.0));
+        context.put("String", new java.lang.String());
         context.put("Text", new igpp.util.Text());
         context.put("File", new igpp.util.File());
         context.put("Date", new igpp.util.Date());
+        context.put("Calc", new igpp.util.Calc());
        
         try
         {
@@ -123,6 +124,9 @@ public class Process
   			if(line.hasOption("s")) separator = line.getOptionValue("s");
   			if(line.hasOption("f")) format = line.getOptionValue("f").toLowerCase();
 
+  			// Fix-up separator to support conversion of "\t" to tab
+  			if(separator.equals("\\t")) separator = "\t";
+  			
    	 		HashMap<String, String> options = new HashMap<String, String>();
    	 		
    	 		// Push options
@@ -130,7 +134,7 @@ public class Process
   	 		if(outfile != null) { options.put("output", outfile); } else { options.put("output", ""); }
   	 		if(template != null) { options.put("template", template); } else { options.put("template", ""); }
  	 		if(includePath != null) { options.put("includePath", includePath); } else { options.put("includePath", ""); }
- 	 		if(separator != null) { options.put("separator", separator); } else { options.put("separator", ""); }
+ 	 		if(separator != null) { options.put("separator", separator); } 
    	 		
    			// Process arguments looking for variable context
    			for(String p : line.getArgs()) {
@@ -139,9 +143,9 @@ public class Process
    					String name = me.getName(p);
    					String filename = me.getFile(p);
    					if(fmt.toLowerCase().equals("pds3")) { context.put(name, igpp.docgen.ParsePDS3.process(filename, includePath)); }
-   					if(fmt.toLowerCase().equals("pds3")) { context.put(name, igpp.docgen.ParsePDS3.process(filename, includePath)); }
    					if(fmt.equals("list")) { context.put(name, igpp.docgen.ParseList.process(filename)); }
    					if(fmt.equals("csv")) { context.put(name, igpp.docgen.ParseTable.process(filename, separator)); }
+   					if(fmt.equals("cdf")) { context.put(name, igpp.docgen.ParseCDF.process(filename)); }
    				} else if(p.indexOf('=') != -1) {	// An assignment x=y
    					String[] part = p.split("=", 2);
    					String name = part[0].trim();
@@ -160,25 +164,29 @@ public class Process
 
         
 		if(me.mVerbose) {
+			System.out.println("--------------");
+			System.out.println(" Defined Keys");
+			System.out.println("--------------");
 			Object[] keys = context.getKeys();
 			for(Object key : keys) {
 				// Skip common context.
+				if(key.equals("Long")) continue;
 				if(key.equals("Integer")) continue;
 				if(key.equals("Double")) continue;
 				if(key.equals("Text")) continue;
 				if(key.equals("File")) continue;
 				if(key.equals("Date")) continue;
+				if(key.equals("Calc")) continue;
 				
 				// Show values in context.
 				String keyname = String.valueOf(key);
-				System.out.println("--------");
 				System.out.println(keyname);
-				System.out.println("--------");
 				
 				@SuppressWarnings("unchecked")			
 				HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
 				igpp.docgen.ValueMap.print(System.out, "", map);
 			}
+			System.out.println("--------------");
 		}
     
         if(template == null) {       	
@@ -205,11 +213,13 @@ public class Process
              	Object keys[] = context.getKeys();
             	for(Object key : keys) {
     				// Skip common context. Also not a HashMap
+    				if(key.equals("Long")) continue;
     				if(key.equals("Integer")) continue;
     				if(key.equals("Double")) continue;
     				if(key.equals("Text")) continue;
     				if(key.equals("File")) continue;
     				if(key.equals("Date")) continue;
+    				if(key.equals("Calc")) continue;
 
     				String keyname = String.valueOf(key);
         			@SuppressWarnings("unchecked")			
@@ -282,10 +292,12 @@ public class Process
 		if(filename.toLowerCase().endsWith(".cat")) { return("pds3"); }
 		if(filename.toLowerCase().endsWith(".fmt")) { return("pds3"); }
 		if(filename.toLowerCase().endsWith(".txt")) { return("list"); }
+		if(filename.toLowerCase().endsWith(".lst")) { return("list"); }
 		if(filename.toLowerCase().endsWith(".csv")) { return("csv"); }
 		if(filename.toLowerCase().endsWith(".tab")) { return("csv"); }
+		if(filename.toLowerCase().endsWith(".cdf")) { return("cdf"); }
 		
-		return("csv");
+		return("csv");	// default
 	}
 	
 	/**

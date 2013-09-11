@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<PDS>
-   <Version>$label.PDS_VERSION_ID</Version>
-   <Items>$label.LIST</Items>
-   #foreach ($item in $label.LIST)
-   <Item>$item</Item>
-   #end
-</PDS>

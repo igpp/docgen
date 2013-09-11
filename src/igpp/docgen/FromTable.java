@@ -106,6 +106,7 @@ public class FromTable
 	        	fieldNames = buffer.split("[ ]+");
 	        } catch(Exception e) {
 	        	System.out.println("Unable to parse data table file. " + e.getMessage());
+	        	data.close();
 	        	return;
 	        }
 	        
@@ -150,6 +151,7 @@ public class FromTable
 		            System.out.println("Problem merging template : " + e );
 		        }
 	        }
+	        data.close();
         } catch (Exception e ) {
             System.out.println("Problem reading table : " + e );
             e.printStackTrace();

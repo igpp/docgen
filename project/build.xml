@@ -111,7 +111,7 @@
     <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${package.name}-${version}.jar">
-        	<fileset dir="${build.dir}/classes" />
+         <fileset dir="${build.dir}/classes" />
             <!-- Add contents of jar files to make stand-alone executable -->
             <!-- Zip file example
             <zipfileset src="${lib.dir}/commons-cli-1.2.jar" includes="**/*.class"/>
@@ -148,7 +148,7 @@
     <target name="dist" depends="jar,api,doc">
         <mkdir dir="${dist.dir}"/>
         <zip destfile="${dist.dir}/${package.name}-${version}.zip">
-            <zipfileset dir="${jar.dir}" prefix="${package.name}-${version}/lib" excludes="**/*-javadoc.jar"  />    <!-- Merge with all lib files -->
+            <zipfileset dir="${jar.dir}" prefix="${package.name}-${version}/lib" includes="**/${package.name}-${version}.jar" excludes="**/*-javadoc.jar"  />    <!-- Merge with all lib files -->
             <zipfileset dir="${api.dir}" prefix="${package.name}-${version}/doc/api" />
             <zipfileset dir="${lib.dir}" prefix="${package.name}-${version}/lib" excludes="**/*-javadoc.jar" erroronmissingdir="false" />
             <zipfileset dir="${bin.dir}" prefix="${package.name}-${version}/bin" erroronmissingdir="false" />
@@ -188,7 +188,7 @@
         <!-- Build jar file containing javadoc --> 
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${package.name}-${version}-javadoc.jar">
-        	   <fileset dir="${api.dir}" />
+            <fileset dir="${api.dir}" />
             <manifest> 
                 <!-- Who is building this jar? -->
                 <attribute name="Built-By" value="${user.name}"/>
@@ -208,16 +208,43 @@
    
    <!-- Process document source files -->
    <target name="doc" depends="doc.check" if="doc.run">
-     <mkdir dir="${build.dir}/doc"/>
-        <exec executable="\projects\tools\mmd2pdf.bat" dir="${doc.dir}">
-		    <!-- <arg value="-t"/>	--> <!-- Create TOC -->
-		    <arg value="-"/>	<!-- Cover page -->
-            <arg value="${package.name}.md" /> <!-- Source Markdown file -->
-            <arg value="../${build.dir}/doc/${package.name}-${version}.pdf"/> <!-- Output -->
-	    </exec>
+      <mkdir dir="${build.dir}/doc"/>
+      <!-- Create User's Guide -->
+      <mkdir dir="${build.dir}/doc/guide"/>
+      <exec executable="\projects\tools\mmd2pdf.bat" dir="${doc.dir}">
+         <!-- <arg value="-t"/> --> <!-- Create TOC -->
+         <arg value="-"/> <!-- Cover page -->
+         <arg value="guide/${package.name}.md" /> <!-- Source Markdown file -->
+         <arg value="../${build.dir}/doc/guide/${package.name}-${version}.pdf"/> <!-- Output -->
+      </exec>
+      <!-- Create Web pages -->
+      <copy todir="${build.dir}/doc" >
+         <fileset dir="${doc.dir}" includes="*.*" excludes="index.html sidebar.js" />
+      </copy>
+      <exec executable="\projects\tools\igpp-docgen\bin\docgen.bat" dir="${doc.dir}">
+          <arg value="-o" /> <arg value="../${build.dir}/doc/index.html"/>   <!-- Output -->
+          <arg value="-f" /> <arg value="html"/>  <!-- Output Format -->
+          <arg value="package=${package.name}" /> <!-- Set variable "package" -->
+          <arg value="version=${version}" /> <!-- Set variable "package" -->
+          <arg value="index.html"/> <!-- Template -->
+      </exec>
+      <exec executable="\projects\tools\igpp-docgen\bin\docgen.bat" dir="${doc.dir}">
+          <arg value="-o" /> <arg value="../${build.dir}/doc/sidebar.js"/>   <!-- Output -->
+          <arg value="-f" /> <arg value="plain"/>  <!-- Output Format -->
+          <arg value="package=${package.name}" /> <!-- Set variable "package" -->
+          <arg value="version=${version}" /> <!-- Set variable "package" -->
+          <arg value="sidebar.js"/> <!-- Template -->
+      </exec>
+      <mkdir dir="${build.dir}/doc/example"/>
+      <copy todir="${build.dir}/doc/example" >
+         <fileset dir="${doc.dir}/example" includes="**" />
+      </copy>
+   </target>
+
+   <target name="tempdoc" depends="doc.check" if="doc.run">
        <exec executable="\projects\tools\igpp-docgen\bin\docgen.bat" dir="${project.dir}">
-           <arg value="-o" /> <arg value="../${build.dir}/doc/index.html"/>	<!-- Output -->
-           <arg value="-f" /> <arg value="html"/>	<!-- Output Format -->
+           <arg value="-o" /> <arg value="../${build.dir}/doc/index.html"/>   <!-- Output -->
+           <arg value="-f" /> <arg value="html"/>  <!-- Output Format -->
            <arg value="package=${package.name}" /> <!-- Set variable "package" -->
            <arg value="version=${version}" /> <!-- Set variable "package" -->
            <arg value="index.html"/> <!-- Template -->
@@ -258,10 +285,10 @@
     
     <!-- Copy files to the release web site -->
     <target name="publish" >
-    	<input message="Password for ${release.user}:" addproperty="release.password" />
-    	<echo message="${release.user}:${release.password}@${release.host}:${release.path}"/>
+      <input message="Password for ${release.user}:" addproperty="release.password" />
+      <echo message="${release.user}:${release.password}@${release.host}:${release.path}"/>
 
-    	<!-- Copy files -->
+      <!-- Copy files -->
        <scp todir="${release.user}@${release.host}:${release.path}" password="${release.password}" >
           <fileset dir="${dist.dir}" includes="**"  />
        </scp>

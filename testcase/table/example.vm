@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-model href="http://pds.nasa.gov/pds4/pds/v03/PDS4_PDS_0310b.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?> 
+<Doc
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ds="http://pds.nasa.gov/pds4/mgs/v00"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/mgs/v00 http://pds.nasa.gov/pds4/mgs/v00/mgs_0_0.xsd"
+   >
+   <ds:name>$data.name</ds:name>
+   <project>$data.project</project>
+   <description>Hello from $data.name in the $data.project project.</description>
+</Doc>
