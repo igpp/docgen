@@ -1,42 +1,51 @@
 function header()
 {
-   var part = document.title.split("/", 2);
+   var part = document.title.split("/");
    var maintitle = part[0];
    var subtitle = '';
-   if(part.length > 1) subtitle = part[1];
-   
    var homepage = 'index.html';
-   if(window.location.pathname.indexOf("index.html") !== -1) { homepage = '../index.html'; }
+   var prefix = '';
+   for(i = 1; i < part.length; i++) prefix += '../';
    
-   var nav = [
-'      <div class="span3">',
-'         <div class="navigation">',
-'            <ul>',
-'               <li><a href="' + homepage + '">home</a></li>',
-'            </ul>',
-'         </div><!-- navigation -->',
-'      </div><!-- span -->'
-   ];
-   
+   // Define header area
    var html = [
 '   <div class="row header with-border">',
 '      <div class="span9 logo">',
-'         <h1><a href="index.html">' + maintitle,
-' <span class="subtitle">' + subtitle + '</span></a></h1>',
-'      </div>'
-   ];
+'         <h1><a href="' + prefix + homepage + '">' + maintitle + '</a>'
+   ]
+   for(i = 1; i < (part.length-1); i++) {
+   	prefix = '';
+   	for(j = i+1; j < part.length; j++) prefix += '../';
+   	html.push(
+   	   ' &bull; <a href="' + prefix + 'index.html">' + part[i] + '</a></span>'
+   	);
+   }
+   if(part.length > 1) {
+      html.push(
+         ' &bull; <span class="subtitle">' + part[part.length-1] + '</span></span>'
+      );
+   }
+   html.push(
+'      </h1>',
+'      </div>',
+'      <div class="span3">',
+'         <div class="navigation">'
+   );
    
 if(part.length > 1) { // Add nav area
    html.push(
-'      <div class="span3">',
-'         <div class="navigation">',
 '            <ul>',
 '               <li><a href="' + homepage + '">home</a></li>',
-'            </ul>',
+'            </ul>'
+   );
+}
+
+// Close nav area
+   html.push(
 '         </div><!-- navigation -->',
 '      </div><!-- span -->'
    );
-}
+
 
 html.push(
 '   </div><!-- header -->',

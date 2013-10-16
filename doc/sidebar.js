@@ -14,6 +14,7 @@ var html = [
 '         <li><a href="guide/igpp-docgen-${options.version}.pdf">User&#39;s Guide</a></li>',
 '         <li><a href="example/index.html">Examples</a></li>',
 '         <li><a href="http://release.igpp.ucla.edu/igpp/docgen/igpp-docgen-${options.version}.zip">Download</a></li>',
+'         <li><a href="https://github.com/igpp/docgen">Source Code</a></li>',
 '      </ul>',
 '   </div><!-- well -->',
 '   &nbsp; <!-- Content to keep span filled -->',

@@ -138,7 +138,7 @@ public class Process
    	 		
    			// Process arguments looking for variable context
    			for(String p : line.getArgs()) {
-   				if(p.indexOf(':') != -1) {	// Load variable space from file.
+   				if(p.indexOf(':') != -1) {	// A name space loaded from file.
    					String fmt = me.getFormat(p);
    					String name = me.getName(p);
    					String filename = me.getFile(p);
@@ -173,6 +173,7 @@ public class Process
 				if(key.equals("Long")) continue;
 				if(key.equals("Integer")) continue;
 				if(key.equals("Double")) continue;
+				if(key.equals("String")) continue;
 				if(key.equals("Text")) continue;
 				if(key.equals("File")) continue;
 				if(key.equals("Date")) continue;
@@ -182,9 +183,11 @@ public class Process
 				String keyname = String.valueOf(key);
 				System.out.println(keyname);
 				
-				@SuppressWarnings("unchecked")			
-				HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
-				igpp.docgen.ValueMap.print(System.out, "", map);
+				if(context.get(keyname) instanceof HashMap<?, ?>) {
+					@SuppressWarnings("unchecked")
+					HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
+					igpp.docgen.ValueMap.print(System.out, "", map);
+				}
 			}
 			System.out.println("--------------");
 		}
@@ -217,14 +220,18 @@ public class Process
     				if(key.equals("Integer")) continue;
     				if(key.equals("Double")) continue;
     				if(key.equals("Text")) continue;
+    				if(key.equals("String")) continue;
     				if(key.equals("File")) continue;
     				if(key.equals("Date")) continue;
     				if(key.equals("Calc")) continue;
 
     				String keyname = String.valueOf(key);
-        			@SuppressWarnings("unchecked")			
-        			HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
-        			igpp.docgen.ValueMap.encodeForXML(map);
+        			if(me.mVerbose) { System.out.println("Loading namespace: " + keyname); }
+    				if(context.get(keyname) instanceof HashMap<?, ?>) {
+    					@SuppressWarnings("unchecked")			
+    					HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
+    					igpp.docgen.ValueMap.encodeForXML(map);
+    				}
             	}
             }
             
@@ -248,7 +255,7 @@ public class Process
         }
         catch (Exception e )
         {
-            System.out.println("Problem merging template : " + e );
+            System.out.println("Problem while merging template : " + e );
             e.printStackTrace();
         }
 

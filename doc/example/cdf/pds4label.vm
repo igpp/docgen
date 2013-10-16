@@ -65,7 +65,7 @@
 #{end}## dimCount()
          <$arrayTag>
             <name>$variable.getAttributeValue('FIELDNAM')</name>
-            <local_identifier>$variable.name</local_identifier>
+            <local_indentifier>$variable.name</local_identifier>
             <offset unit="byte">$variable.startByte</offset>
             <axes>$axis</axes>
             <axis_index_order>#foreach($a in [1..$axis])$a #end</axis_index_order>

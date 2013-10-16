@@ -12,7 +12,7 @@
 <div class="container">
    <script>header();</script>
    <script>sidebar();</script>
-   <div class="span9">
+   <div class="span9 content">
    	<p>
       These examples illustrate how to use the igpp.docgen tool which 
       is a document generator based on 
@@ -63,11 +63,11 @@ $list.name
       </p>
    
       <h2><a name="Tables">Using CSV Tables</a></h2>
-      <p>Support for CSV and TAB delimited tables is part of igpp.docgen. In a table
+      <p>Support for CSV and TAB delimited tables is part of <i>igpp.docgen</i>. In a CSV table
       any line beginning with a "#" is considered a comment and ignored by the parser.
       The first non-commented line is used to determine the names for each field and 
-      how many fields to expect in each record. The igpp.docgen parser creates a 
-      an array of record in the generated context. Each record contains a named
+      how many fields to expect in each record. The igpp.docgen parser creates 
+      an array of records in the generated context. Each record contains a named
       value which matches the name of the fields and is assigned the value found 
       in the record.
       </p>
@@ -75,30 +75,29 @@ $list.name
       <p>
       See <a href="table/index.html">Examples</a>
       </p>
-      <p>
-       The igpp.docgen tool was developed using Java and will run on any platform with a supported 
-       Java Runtime Environment (JRE). The software was specifically developed under Java version 1.6 
-       and has only been tested with this version. You can determine which version of Java you are running
-       with the command:
-       </p>
-       <div class="code">
-          <pre>% java -version</pre>
-          <pre>java version "1.6.0_26"</pre>
-          <pre>Java(TM) SE Runtime Environment (build 1.6.0_26-b03-384-10M3425)</pre>
-          <pre>Java HotSpot(TM) 64-Bit Server VM (build 20.1-b02-384, mixed mode)</pre>
-       </div>
+
       <h2><a name="pds3">Using PDS3 Labels</a></h2>
-      <p>Download the <i>igpp.docgen</i> package from the IGPP 
-      	<a class="externalLink" href="http://release.igpp.ucla.edu/igpp/docgen/" target="_blank">web site</a> 
-      	site. The binary distribution is available in identical zip or tar/gzip packages. 
-      	The installation directory may vary from environment to environment but in UNIX-based environments 
-      	it is typical to install software packages in the <i>/usr/local</i> directory and in Windows-based 
-      	environments it is typical to install software packages in the <i>C:\Program Files</i> directory. 
-      	Unpack the selected binary distribution file with the following command:
+      <p>
+      PDS3 is a metadata standard used to describe data in the planetary domain. 
+      It is primarily used by NASA Planetary Data System. The metadata is expressed using
+      keyword=value pairs in a structured arraignment. <i>igpp.docgen</i> can parse PDS3 labels
+      and provide access to the metadata using nested maps.
       </p>
-      <div class="code">
-          <pre>% unzip igpp-docgen-1.0.1.zip</pre>
-      </div>
+      <p>
+      See <a href="pds3/index.html">Examples</a>
+      </p>
+
+      <h2><a name="cdf">Using CDF files</a></h2>
+      <p>
+      The Common Data Format (CDF) is a widely used format for storing data. It is a "self-documented" 
+      format which contains both metadata and data. Information is stored in a CDF file as
+      attributes and variables. <i>igpp.docgen</i> can parse CDF files and make available 
+      both the explicit and implicit metadata that describes the content of the CDF file.
+      available.
+      </p>
+      <p>
+      See <a href="cdf/index.html">Examples</a>
+      </p>
 </div><!-- span -->
 <script>footer();</script>
 </div><!-- container -->

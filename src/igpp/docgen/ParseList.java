@@ -14,7 +14,7 @@ import org.apache.commons.cli.PosixParser;
 
 public class ParseList {
 	private String mVersion = "1.0.0";
-	private String mOverview = "Parse a text file and generate a list values which can be used with Apache Velocity tools.\n"
+	private String mOverview = "Parse a text file and generate a list of values which can be used with Apache Velocity tools.\n"
 						+ "When text files are parsed lines beginning with \"#\" are considered comments.\n" 
 						+ "All other lines are parsed as a \"name=value\". \n"
 						+ "If a line does not conform to the \"name=value\" syntax it is ignored.\n"

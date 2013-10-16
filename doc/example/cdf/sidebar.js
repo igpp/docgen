@@ -4,14 +4,12 @@ function sidebar() {
 '       <div class="well" style="padding: 8px 0px; position: fixed;"">',
 '         <ul class="nav nav-list">',
 '           <li class="nav-header">Examples</li>',
-'           <li><a href="list/index.html">Value Lists</a></li>',
-'           <li><a href="table/index.html">Tables</a></li>',
-'           <li><a href="pds3/index.html">PDS3</a></li>',
-'           <li><a href="cdf/index.html">CDF</a></li>',
+'           <li><a href="generate.html">Generate</a></li>',
 '         </ul>',
 '       </div><!-- well -->',
 '      &nbsp; <!-- Content to keep span filled -->',
 '   </div><!-- sidebar -->'
    ];
    for(x in html) { document.write(html[x] + "\n"); }
+
 }
