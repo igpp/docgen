@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://pds.nasa.gov/pds4/pds/v03/PDS4_PDS_1101.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?> 
 <Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 file:/C:/My%20Documents/PDS/PDS4/Release%201.0/PDS4_PDS_1000.xsd">

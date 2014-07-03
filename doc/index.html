@@ -17,11 +17,11 @@
          <strong>Version: ${options.version}</strong>.
       </div>
       
-      <h1><a name="About">About igpp.docgen</a></h1>
+      <h1><a name="About">About ${options.base}</a></h1>
       <p>
       The ${options.package} tool is a document generator based on Apache Velocity. The tool can process template 
       documents written in Velocity Template Language (VTL). It can read PDS3 labels, text files containing keyword=value pairs, and 
-      spreadsheets in CSV or TAB format. The content of each processed files are assigned to varaibles in separate 
+      spreadsheets in CSV or TAB format. The content of each processed files are assigned to variables in separate 
       Velocity contexts and can be referenced in the Velocity template file. The output format can be PDS3 or XML.
       </p>
    
@@ -40,7 +40,7 @@
       </p>
       
       <h1><a name="Unpacking">Unpacking the Package</a></h1>
-      <p><a href="igpp-docgen-${options.version}.zip">Download</a> the <i>igpp.docgen</i> package from the IGPP 
+      <p><a href="${options.package}-${options.version}.zip">Download</a> the <i>${options.base}</i> package from the IGPP 
       	<a class="externalLink" href="http://release.igpp.ucla.edu/igpp/docgen/" target="_blank">web site</a> 
       	site. The binary distribution is available in identical zip or tar/gzip packages. 
       	The installation directory may vary from environment to environment but in UNIX-based environments 
@@ -49,7 +49,7 @@
       	Unpack the selected binary distribution file with the following command:
       </p>
       <div class="code">
-          <pre>% unzip igpp-docgen-${options.version}.zip</pre>
+          <pre>% unzip ${options.package}-${options.version}.zip</pre>
       </div>
       <p>The unzip will result in the creation of the <i>${options.package}-${options.version}</i> directory 
       	with the following directory structure:
@@ -86,11 +86,11 @@
       Shell scripts to run the tool are in the "bin" directory in the distribution. You can run the tool on a 
       Linux system with the command:
          <div class="code">
-            <pre>% ${options.package}</pre>
+            <pre>% ${options.command}</pre>
          </div>
       or on a Windows system with the command:
          <div class="code">
-            <pre>% ${options.package}.bat</pre>
+            <pre>% ${options.command}.bat</pre>
          </div>
       Full documentation for the tool can be found <a href="guide/${options.package}-${options.version}.pdf">here</a>.
       </p>

@@ -27,7 +27,7 @@ import org.apache.commons.cli.HelpFormatter;
 
 public class Process
 {
-	private String mVersion = "1.0.6";
+	private String mVersion = "1.0.11";
 	private String mOverview = "Defines variables that can be used to populate a Apache Velocity template.\n"
 			 + "A Velocity template contains text and references to  variables. The pds.docgen executable is\n"
 			 + "used to defined the value assigned to variables. Variables can be defined on the command line,\n" 
@@ -138,19 +138,20 @@ public class Process
    	 		
    			// Process arguments looking for variable context
    			for(String p : line.getArgs()) {
-   				if(p.indexOf(':') != -1) {	// A name space loaded from file.
-   					String fmt = me.getFormat(p);
-   					String name = me.getName(p);
-   					String filename = me.getFile(p);
-   					if(fmt.toLowerCase().equals("pds3")) { context.put(name, igpp.docgen.ParsePDS3.process(filename, includePath)); }
-   					if(fmt.equals("list")) { context.put(name, igpp.docgen.ParseList.process(filename)); }
-   					if(fmt.equals("csv")) { context.put(name, igpp.docgen.ParseTable.process(filename, separator)); }
-   					if(fmt.equals("cdf")) { context.put(name, igpp.docgen.ParseCDF.process(filename)); }
-   				} else if(p.indexOf('=') != -1) {	// An assignment x=y
+				if(p.indexOf('=') != -1) {	// An assignment x=y
    					String[] part = p.split("=", 2);
    					String name = part[0].trim();
    					String value = part[1].trim();
    					options.put(name, value);
+				} else if(p.indexOf(':') != -1) {	// A name space name - load from file.
+   					String fmt = me.getFormat(p);
+   					String name = me.getName(p);
+   					String filename = me.getFile(p);
+   					if(me.mVerbose) {  System.out.println("Namespace: " + name + "; parsing as " + fmt + " " + filename); }
+   					if(fmt.equalsIgnoreCase("pds3")) { context.put(name, igpp.docgen.ParsePDS3.process(filename, includePath)); }
+   					if(fmt.equalsIgnoreCase("list")) { context.put(name, igpp.docgen.ParseList.process(filename)); }
+   					if(fmt.equalsIgnoreCase("csv")) { context.put(name, igpp.docgen.ParseTable.process(filename, separator)); }
+   					if(fmt.equalsIgnoreCase("cdf")) { context.put(name, igpp.docgen.ParseCDF.process(filename)); }
    				} else {
    					template = p;
    				}
@@ -181,12 +182,12 @@ public class Process
 				
 				// Show values in context.
 				String keyname = String.valueOf(key);
-				System.out.println(keyname);
+				System.out.println(keyname + "[" + context.get(keyname).getClass().getName() + "]");
 				
 				if(context.get(keyname) instanceof HashMap<?, ?>) {
 					@SuppressWarnings("unchecked")
 					HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
-					igpp.docgen.ValueMap.print(System.out, "", map);
+					igpp.docgen.ValueMap.print(System.out, "   ", map);
 				}
 			}
 			System.out.println("--------------");
@@ -226,7 +227,6 @@ public class Process
     				if(key.equals("Calc")) continue;
 
     				String keyname = String.valueOf(key);
-        			if(me.mVerbose) { System.out.println("Loading namespace: " + keyname); }
     				if(context.get(keyname) instanceof HashMap<?, ?>) {
     					@SuppressWarnings("unchecked")			
     					HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
@@ -238,7 +238,7 @@ public class Process
             Velocity.mergeTemplate(template, "ISO-8859-1", context, writer);
             
             if(format.equals("xml")) {
-            	outstream.print(igpp.xml.ToXML.stringToPlainXML(writer.toString()));
+            	outstream.print(igpp.xml.ToXML.stringToXML(writer.toString()));
             } else if(format.equals("html")) {
                 outstream.print(igpp.xml.ToXHTML.stringToXHTML(writer.toString()));
             } else if(format.equals("pds3")) {
