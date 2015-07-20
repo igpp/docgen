@@ -237,8 +237,6 @@ available methods check the documentaiton for each class. The most useful and co
 are:
 
 **Integer**: Provides access to the java.lang.Integer class.
-
-Common methods:
 >
     int Integer.parseInt(string) : Parses the string as an integer.  
              Throws an exception if the string is not a valid integer value.  
@@ -254,6 +252,14 @@ Common methods:
     double Double.parseDouble(string) : Parses the string as an double.  
              Throws an exception if the string is not a valid double value.
 
+**String**: Provides access to the java.lang.String class.
+>
+	startsWith(prefix) : Returns true if string starts with "prefix", false otherwise.
+	toUpperCase() : Converts all of the characters in this String to upper case using the rules of the default locale.
+	toLowerCase() : Converts all of the characters in this String to lower case using the rules of the default locale.
+	trim() : Returns a copy of the string, with leading and trailing whitespace omitted.
+	replaceAll(String regex, String replacement) : Replaces each substring of this string that matches the given regular expression with the given replacement.
+	
 **File**: Provides access to the igpp.util.File class.
 >
     copy(String source, String destination) : Copy a file from one 
@@ -272,8 +278,19 @@ Common methods:
     String getSHA1(String pathname) : Return the SHA-1 digest for a file.     
     String getSHA256(String pathname) : Return the SHA-256 digest for a file.     
     String getSHA512(String pathname) : Return the SHA-512 digest for a file.     
-
-
+	 
+**Date**: Provides access to the igpp.util.Date class.
+>
+   now() : return the current data and time in the locale format.
+	now("ISO") : return the current date and time in ISO-9601 format.
+	
+**Calc**: Provide access to the igpp.util.Calc class.
+>
+   perform(arg1, op, arg2) : Perform the mathematic operation (-, +, *, /) on arg1 and arg2, return the result.
+	sum(list) : Sum the values in the list.
+	ceil(value) : Round a value up to nearest integer and return value as a long.
+	floor(value) : Round a value down to nearest integer and return value as a long.
+	
 ## Text file parsing (.txt)
 _________________________
 

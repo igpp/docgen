@@ -15,7 +15,7 @@ import org.apache.commons.cli.PosixParser;
 public class ParseTable {
 	private String mVersion = "1.0.0";
 	private String mOverview = "Parse text file containing a delimited table of values and generate a\n"
-								+ "a HashMap list values which can be used with Apache Velocity tools.\n"
+								+ "a HashMap list of values which can be used with Apache Velocity tools.\n"
 								+ "Field names are taken from the first non-comment record. Comments\n"
 								+ "are lines that begin with \"#\" and are ignore. The array of records\n"
 								+ "is assigned the name \"record\".\n"

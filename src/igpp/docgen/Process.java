@@ -27,7 +27,7 @@ import org.apache.commons.cli.HelpFormatter;
 
 public class Process
 {
-	private String mVersion = "1.0.11";
+	private String mVersion = "1.0.13";
 	private String mOverview = "Defines variables that can be used to populate a Apache Velocity template.\n"
 			 + "A Velocity template contains text and references to  variables. The pds.docgen executable is\n"
 			 + "used to defined the value assigned to variables. Variables can be defined on the command line,\n" 
@@ -119,7 +119,7 @@ public class Process
    			if(line.hasOption("h")) me.showHelp();
    			if(line.hasOption("v")) me.mVerbose = true;
    			if(line.hasOption("o")) outfile = line.getOptionValue("o");
-   			if(line.hasOption("t")) template = line.getOptionValue("t");
+   			if(line.hasOption("t")) templatePath = line.getOptionValue("t");
    			if(line.hasOption("i")) includePath = line.getOptionValue("i");
   			if(line.hasOption("s")) separator = line.getOptionValue("s");
   			if(line.hasOption("f")) format = line.getOptionValue("f").toLowerCase();
@@ -128,14 +128,15 @@ public class Process
   			if(separator.equals("\\t")) separator = "\t";
   			
    	 		HashMap<String, String> options = new HashMap<String, String>();
+   	 		HashMap<String, String> namespace = new HashMap<String, String>();
    	 		
    	 		// Push options
   	 		options.put("verbose", igpp.util.Text.getYesNo(me.mVerbose));
   	 		if(outfile != null) { options.put("output", outfile); } else { options.put("output", ""); }
-  	 		if(template != null) { options.put("template", template); } else { options.put("template", ""); }
+  	 		if(templatePath != null) { options.put("templatePath", templatePath); } else { options.put("templatePath", ""); }
  	 		if(includePath != null) { options.put("includePath", includePath); } else { options.put("includePath", ""); }
  	 		if(separator != null) { options.put("separator", separator); } 
-   	 		
+   	 		   			
    			// Process arguments looking for variable context
    			for(String p : line.getArgs()) {
 				if(p.indexOf('=') != -1) {	// An assignment x=y
@@ -147,6 +148,7 @@ public class Process
    					String fmt = me.getFormat(p);
    					String name = me.getName(p);
    					String filename = me.getFile(p);
+   					namespace.put(name, filename);
    					if(me.mVerbose) {  System.out.println("Namespace: " + name + "; parsing as " + fmt + " " + filename); }
    					if(fmt.equalsIgnoreCase("pds3")) { context.put(name, igpp.docgen.ParsePDS3.process(filename, includePath)); }
    					if(fmt.equalsIgnoreCase("list")) { context.put(name, igpp.docgen.ParseList.process(filename)); }
@@ -154,9 +156,11 @@ public class Process
    					if(fmt.equalsIgnoreCase("cdf")) { context.put(name, igpp.docgen.ParseCDF.process(filename)); }
    				} else {
    					template = p;
+   					options.put("template", template);
    				}
    			}
    	        context.put("options", options);
+   	        context.put("context", namespace);
         } catch(Exception e) {
             System.out.println(":: Problem processing arguments ::" );
             e.printStackTrace(System.out);
@@ -168,8 +172,27 @@ public class Process
 			System.out.println("--------------");
 			System.out.println(" Defined Keys");
 			System.out.println("--------------");
+			System.out.println("* Internal *");
+			System.out.println("");
 			Object[] keys = context.getKeys();
+			// Show keys for embedded classes
 			for(Object key : keys) {
+				
+				String keyname = String.valueOf(key);
+				if(context.get(keyname) instanceof HashMap<?, ?>) continue;
+				
+				// Show values in context.
+				System.out.println(keyname + "[" + context.get(keyname).getClass().getName() + "]");
+			}
+			
+			System.out.println("");
+			System.out.println("*Generated*");
+			System.out.println("");
+			
+			// Now show generated keys
+			keys = context.getKeys();
+			for(Object key : keys) {
+				
 				// Skip common context.
 				if(key.equals("Long")) continue;
 				if(key.equals("Integer")) continue;
@@ -183,7 +206,7 @@ public class Process
 				// Show values in context.
 				String keyname = String.valueOf(key);
 				System.out.println(keyname + "[" + context.get(keyname).getClass().getName() + "]");
-				
+
 				if(context.get(keyname) instanceof HashMap<?, ?>) {
 					@SuppressWarnings("unchecked")
 					HashMap<String, Object> map = (HashMap<String, Object>) context.get(keyname);
@@ -291,7 +314,7 @@ public class Process
 	public String getFormat(String spec)
 	{
 		String filename = "";
-		String[] part = spec.split(":", 3);
+		String[] part = spec.trim().split(":", 3);
 		if(part.length == 3) return(part[0]);
 		// Otherwise inspect extension
 		filename = part[part.length-1];

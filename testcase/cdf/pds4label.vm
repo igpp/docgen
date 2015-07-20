@@ -71,7 +71,8 @@
             <axes>$axis</axes>
             <axis_index_order>#foreach($a in [1..$axis])$a #end</axis_index_order>
             <description>$variable.getAttributeValue("CATDESC")
-            $variable.getAttributeValue("VAR_NOTES") </description>
+            $variable.getAttributeValue("VAR_NOTES") 
+			$variable.getDataSample(0)</description>
             <Element_Array>
                 <data_type>$cdf.getDataTypePDS($variable.dataType)</data_type>
             </Element_Array>
