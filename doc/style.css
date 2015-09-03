@@ -15,8 +15,14 @@ a {color:#08c; text-decoration:none}
 a:focus {outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
 a:hover,a:active {outline:0}
 a:hover {color:#005580; text-decoration:underline}
-a[name]:hover {color:#08c; text-decoration:none}
 [class*="span"] {float:left;margin-left:20px}
+@media print
+{    
+  .sidebar, .sidebar *
+    {
+     display: none !important;
+  }
+}
 .code { margin-bottom:10px; background-color: #fefbf3; padding: 9px; border: 1px solid rgba(0,0,0,.2); -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.1); -moz-box-shadow: 0 1px 2px rgba(0,0,0,.1); box-shadow: 0 1px 2px rgba(0,0,0,.1);}
 .code { font-size: 90%; line-height: 1.1em;}
 .code pre { margin:0; }

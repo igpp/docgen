@@ -235,7 +235,7 @@
       <mkdir dir="${build.dir}/doc"/>
       <!-- Create User's Guide -->
       <mkdir dir="${build.dir}/doc/guide"/>
-      <exec executable="\projects\tools\mmd2pdf.bat" dir="${doc.dir}">
+      <exec executable="\tools\igpp\markdown\bin\md2pdf.bat" dir="${doc.dir}">
          <!-- <arg value="-t"/> --> <!-- Create TOC -->
          <arg value="-"/> <!-- Cover page -->
          <arg value="guide/${package.name}.md" /> <!-- Source Markdown file -->
@@ -243,10 +243,10 @@
       </exec>
       <!-- Create Web pages -->
       <copy todir="${build.dir}/doc" >
-         <fileset dir="${doc.dir}" includes="*.*" excludes="index.html sidebar.js" />
+         <fileset dir="${doc.dir}" includes="*.*" />
       </copy>
       <!-- Process and copy index.html to doc folder -->
-      <exec executable="\projects\tools\igpp-docgen\bin\docgen.bat" dir="${doc.dir}">
+      <exec executable="\tools\igpp\docgen\bin\docgen.bat" dir="${doc.dir}">
           <arg value="-o" /> <arg value="../${build.dir}/doc/index.html"/>   <!-- Output -->
           <arg value="-f" /> <arg value="html"/>  <!-- Output Format -->
           <arg value="package=${package.name}" /> <!-- Set variable "package" -->
@@ -256,7 +256,7 @@
           <arg value="index.html"/> <!-- Template -->
       </exec>
       <!-- Process and copy sidebar.js to doc folder -->
-      <exec executable="\projects\tools\igpp-docgen\bin\docgen.bat" dir="${doc.dir}">
+      <exec executable="\tools\igpp\docgen\bin\docgen.bat" dir="${doc.dir}">
           <arg value="-o" /> <arg value="../${build.dir}/doc/sidebar.js"/>   <!-- Output -->
           <arg value="-f" /> <arg value="plain"/>  <!-- Output Format -->
           <arg value="package=${package.name}" /> <!-- Set variable "package" -->
@@ -267,11 +267,11 @@
       </exec>
       <mkdir dir="${build.dir}/doc/example"/>
       <copy todir="${build.dir}/doc/example" >
-         <fileset dir="${doc.dir}/example" includes="**" excludes="index.html"/>
+         <fileset dir="${doc.dir}/example" includes="**"/>
       </copy>
       <!-- Process and copy index.html to doc/example folder -->
-      <exec executable="\projects\tools\igpp-docgen\bin\docgen.bat" dir="${doc.dir}/example">
-          <arg value="-o" /> <arg value="../${build.dir}/doc/example/index.html"/>   <!-- Output -->
+      <exec executable="\tools\igpp\docgen\bin\docgen.bat" dir="${doc.dir}/example">
+          <arg value="-o" /> <arg value="../../${build.dir}/doc/example/index.html"/>   <!-- Output -->
           <arg value="-f" /> <arg value="plain"/>  <!-- Output Format -->
           <arg value="package=${package.name}" /> <!-- Set variable "package" -->
           <arg value="base=${package.base}" /> <!-- Set variable "base" -->
@@ -282,7 +282,7 @@
    </target>
 
    <target name="tempdoc" depends="doc.check" if="doc.run">
-       <exec executable="\projects\tools\igpp-docgen\bin\docgen.bat" dir="${project.dir}">
+       <exec executable="\tools\igpp\docgen\bin\docgen.bat" dir="${project.dir}">
            <arg value="-o" /> <arg value="../${build.dir}/doc/index.html"/>   <!-- Output -->
            <arg value="-f" /> <arg value="html"/>  <!-- Output Format -->
            <arg value="package=${package.name}" /> <!-- Set variable "package" -->
