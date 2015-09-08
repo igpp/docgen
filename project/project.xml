@@ -13,6 +13,7 @@
     <property name="copyright"    value="Copyright &#169; 2014-2015 Regents University of California. All Rights Reserved."/>    
     <property name="release.user"  value="tking"/>
     <property name="release.host"  value="release.igpp.ucla.edu"/>
+    <property name="release.home"  value="igpp/docgen"/>
     <property name="release.path"  value="/var/www/release/site/root/igpp/docgen"/>
     <property name="release.local"   value="/java/jre/lib/ext" />
     <property name="release.jar"   value="/projects/jar/igpp" />
